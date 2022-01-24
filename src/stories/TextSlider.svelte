@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { identity } from 'svelte/internal';
+    import { identity, text } from 'svelte/internal';
     import { fade, fly } from 'svelte/transition';
     import { slide } from 'svelte/transition';
-	import { hslide } from './hslide.js';
+	import { hslide } from './scripts/hslide.js';
 
     interface TextElement{
 		title: string;
@@ -11,6 +11,8 @@
 
 	export let content:TextElement[] = [];
     export let color = '#fbe26b';
+    export let buttonColor = '#fbe26b';
+    export let textColor = '#202020';
     export let currentSlide = 1;
 
     let slides = document.querySelectorAll('.slide');
@@ -28,7 +30,7 @@
     {#if currentSlide === id}
       <div  class="slide {currentSlide === id? 'active' : ''}" style="background: {color};">
             <!--<div class="img"/>-->
-            <div class="info" in:hslide={transition_args} out:hslide={transition_args}>
+            <div class="info" in:hslide={transition_args} out:hslide={transition_args} style="color: {textColor};">
                 <div class="title">{slide.title}</div>
                 <div class="content">{slide.content}</div>
             </div>
@@ -36,12 +38,12 @@
     {/if}
     {/each}
     <div class="navigationButtons">
-        <div class="button" on:click={() => currentSlide = currentSlide - 1}>&#10094;</div>
-        <div class="button" on:click={() => currentSlide = currentSlide + 1}>&#10095;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() => currentSlide = currentSlide - 1}>&#10094;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() => currentSlide = currentSlide + 1}>&#10095;</div>
     </div>
     <div class="navigationDots">
         {#each content as _slide, id}
-        <div class="button {currentSlide === id? 'active' : ''}" on:click={() => currentSlide = id}>
+        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}; opacity: 0.5;" on:click={() => currentSlide = id}>
 
         </div>
         {/each}
@@ -72,6 +74,7 @@
     }
 
     .img-slider .slide .info{
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         position: absolute;
         top: 0;
         padding: 15px 30px;
@@ -79,7 +82,6 @@
     }
 
     .img-slider .slide .info .title{
-        color: rgb(32, 32, 32);
         font-size: 16px;
         font-weight: 700;
 
@@ -88,7 +90,6 @@
     }
 
     .img-slider .slide .info .content{
-        color: rgb(32, 32, 32);
         font-size: 16px;
         width: 100%;
 
@@ -106,7 +107,6 @@
     }
 
     .img-slider .navigationDots .button{
-        background: rgb(0, 0, 0, 0.5);
         width: 12px;
         height: 12px;
         margin-right: 10px;
@@ -115,13 +115,13 @@
     }
 
     .img-slider .navigationDots .button.active{
-        background: rgb(0, 0, 0, 1);
+        opacity: 1 !important;
         width: 17px;
         height: 17px;
     }
 
     .img-slider .navigationDots .button:hover{
-        background: rgb(0, 0, 0, 1);
+        opacity: 1 !important;
     }
 
     .img-slider .navigationButtons{

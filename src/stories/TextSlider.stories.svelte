@@ -22,9 +22,10 @@
   <Template let:args>
     <TextSlider
         content={args.content}
-        color={args.color}
+        backgroundColor={args.backgroundColor}
         buttonColor={args.buttonColor}
         textColor={args.textColor}
+        transitionTime={args.transitionTime}
     />
   </Template>
 
@@ -33,17 +34,19 @@
     name="Yellow"
     args={{
       content: content,
-      color: "#fbe26b",
+      backgroundColor: "#fbe26b",
       buttonColor: "#fbe26b",
       textColor: "#202020",
+      transitionTime: 10000,
     }}
   />
   <Story
     name="Blue"
     args={{
       content: content,
-      color: "#096fae",
+      backgroundColor: "#096fae",
       buttonColor: "#66cfd6",
       textColor: "#f9f9f9",
+      transitionTime: 10000,
     }}
   />

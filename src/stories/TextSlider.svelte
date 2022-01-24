@@ -1,7 +1,5 @@
 <script lang="ts">
-    import { identity, text } from 'svelte/internal';
-    import { fade, fly } from 'svelte/transition';
-    import { slide } from 'svelte/transition';
+    import { afterUpdate } from 'svelte/internal';
 	import { hslide } from './scripts/hslide.js';
 
     interface TextElement{
@@ -10,17 +8,37 @@
     }
 
 	export let content:TextElement[] = [];
-    export let color = '#fbe26b';
+    export let backgroundColor = '#fbe26b';
     export let buttonColor = '#fbe26b';
     export let textColor = '#202020';
-    export let currentSlide = 1;
-
-    let slides = document.querySelectorAll('.slide');
-    let buttons = document.querySelectorAll('button');
+    export let currentSlide = 0;
+    export let transitionTime = 10000;
 
     const transition_args = {
 		duration: 200,
 	}
+
+
+    let animatonCurrentDot
+
+    afterUpdate(() => {
+        animatonCurrentDot = document.querySelector('.img-slider .navigationDots .button.active .progress').animate([
+            // keyframes
+            { width: 0 },
+            { width: '100%' },
+
+        ],
+        {
+            // timing options
+            duration: transitionTime,
+            iterations: 1,
+        });
+
+        animatonCurrentDot.onfinish = function(e) {
+            currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;
+        }
+    })
+
 </script>
 
 
@@ -28,7 +46,7 @@
 <div class="img-slider">
     {#each content as slide, id}
     {#if currentSlide === id}
-      <div  class="slide {currentSlide === id? 'active' : ''}" style="background: {color};">
+      <div  class="slide {currentSlide === id? 'active' : ''}" style="background: {backgroundColor};">
             <!--<div class="img"/>-->
             <div class="info" in:hslide={transition_args} out:hslide={transition_args} style="color: {textColor};">
                 <div class="title">{slide.title}</div>
@@ -38,13 +56,15 @@
     {/if}
     {/each}
     <div class="navigationButtons">
-        <div class="button" style="background: {buttonColor};" on:click={() => currentSlide = currentSlide - 1}>&#10094;</div>
-        <div class="button" style="background: {buttonColor};" on:click={() => currentSlide = currentSlide + 1}>&#10095;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() => { animatonCurrentDot.cancel(); currentSlide = currentSlide - 1 < 0 ? content.length - 1 : currentSlide - 1;}}>&#10094;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() =>{ animatonCurrentDot.cancel(); currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;}}>&#10095;</div>
     </div>
     <div class="navigationDots">
         {#each content as _slide, id}
-        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}; opacity: 0.5;" on:click={() => currentSlide = id}>
-
+        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}80;" on:click={() => { animatonCurrentDot.cancel(); currentSlide = id;}}>
+            {#if currentSlide === id}
+            <div class="progress"  style="background-color: {textColor};"/>
+            {/if}
         </div>
         {/each}
     </div>
@@ -112,12 +132,28 @@
         margin-right: 10px;
         border-radius: 50%;
         cursor: pointer;
+        transition: width 0.1s;
     }
 
     .img-slider .navigationDots .button.active{
+        width: 90px;
+        height: 10px;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: flex-start;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        transition: width 0.5s;
+    }
+
+    .img-slider .navigationDots .button.active .progress{
         opacity: 1 !important;
-        width: 17px;
-        height: 17px;
+        position: flex;
+        width: 0;
+        height: 10px;
+        border-radius: 10px;
+        z-index: 2;
     }
 
     .img-slider .navigationDots .button:hover{
@@ -227,7 +263,5 @@
         .img-slider .navigationDots{
             bottom: 10px;
         }
-
-
     }
 </style>

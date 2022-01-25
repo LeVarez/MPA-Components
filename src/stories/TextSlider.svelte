@@ -114,7 +114,7 @@
         width: 100%;
 
         border-radius: 5px;
-        max-height: 55%;
+        max-height: 170px;
         overflow: hidden;
     }
 
@@ -137,7 +137,6 @@
 
     .img-slider .navigationDots .button.active{
         width: 90px;
-        height: 10px;
         border-radius: 10px;
         align-items: center;
         justify-content: flex-start;
@@ -151,7 +150,7 @@
         opacity: 1 !important;
         position: flex;
         width: 0;
-        height: 10px;
+        height: 12px;
         border-radius: 10px;
         z-index: 2;
     }
@@ -200,6 +199,7 @@
 
         .img-slider .slide .info .content{
             font-size: 15px;
+            max-height: 220px;
         }
 
         .img-slider .navigationDots{
@@ -210,6 +210,12 @@
             width: 10px;
             height: 10px;
             margin: 8px;
+        }
+        .img-slider .navigationDots .button.active{
+            width: 90px;
+        }
+        .img-slider .navigationDots .button.active .progress{
+            height: 10px;
         }
     }
 
@@ -229,6 +235,7 @@
 
         .img-slider .slide .info .content{
             font-size: 13px;
+            max-height: 120px;
         }
 
         .img-slider .navigationDots{
@@ -239,6 +246,21 @@
             width: 8px;
             height: 8px;
             margin: 6px;
+        }
+        .img-slider .navigationDots .button.active{
+            width: 70px;
+        }
+        .img-slider .navigationDots .button.active .progress{
+            height: 8px;
+        }
+        .img-slider .navigationButtons .button{
+            width: 35px;
+            height: 35px;
+        }
+        .img-slider .navigationButtons .button{
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
         }
     }
 
@@ -258,10 +280,16 @@
 
         .img-slider .slide .info .content{
             font-size: 11px;
+            max-height: 90px;
         }
 
         .img-slider .navigationDots{
             bottom: 10px;
+        }
+        .img-slider .navigationButtons .button{
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
         }
     }
 </style>

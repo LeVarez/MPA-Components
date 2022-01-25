@@ -1,12 +1,18 @@
 <script>
-	import TextSlider from './TextSlider.svelte';
-	import content from './data/content.json';
+	import TextSection from './stories/TextSection.svelte';
+	import textSection from './stories/data/TextSection.json';
 </script>
 
-<main>
-	<TextSlider {content}/>
-</main>
+<div class="test">
+	<TextSection
+        title={textSection.title}
+        content={textSection.content}
+        buttonText={textSection.buttonText}
+    />
+</div>
 
 <style>
-
+	.test{
+		width: 400px;
+	}
 </style>

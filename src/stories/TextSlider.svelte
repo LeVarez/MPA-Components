@@ -61,7 +61,7 @@
     </div>
     <div class="navigationDots">
         {#each content as _slide, id}
-        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}80;" on:click={() => { animatonCurrentDot.cancel(); currentSlide = id;}}>
+        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}{currentSlide === id? '20': ''}; opacity: {currentSlide === id? '1' : '0.2'};" on:click={() => { animatonCurrentDot.cancel(); currentSlide = id;}}>
             {#if currentSlide === id}
             <div class="progress"  style="background-color: {textColor};"/>
             {/if}

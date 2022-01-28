@@ -25,15 +25,14 @@
     {#if numShowedParagraph < content.length}
     <hr>
     <div
-        class="{currentShowedParagraph === content.length? "readLessButton": "readMoreButton"} readButton"
-        on:click={() => {
-            currentShowedParagraph === content.length ?
-                currentShowedParagraph=numShowedParagraph :
-                currentShowedParagraph = content.length}
-        }
-    >
+    class="{currentShowedParagraph === content.length? "readLessButton": "readMoreButton"} readButton"
+    on:click={
+    () => {
+        if(currentShowedParagraph === content.length) currentShowedParagraph=numShowedParagraph;
+        else currentShowedParagraph = content.length;
+    }}>
         <div class="buttonArrow">&#10094</div>
-        <div>{ @html currentShowedParagraph === content.length? "<b>Read less</b>" : buttonText}</div>
+        <div class="text">{ @html currentShowedParagraph === content.length? "<b>Read less</b>" : buttonText}</div>
     </div>
     {/if}
 </div>

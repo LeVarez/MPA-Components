@@ -1,9 +1,10 @@
 <script lang="ts">
     export let variable: number;
+    let width, height;
 </script>
 
-<div class="cac">
-    <p>Hello</p>
+<div class="article">
+    <h2>Helloa dfsfsdfsdfsdfsdfsfsdsdf</h2>
 </div>
 
 <style>

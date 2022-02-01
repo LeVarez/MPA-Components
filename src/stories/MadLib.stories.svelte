@@ -3,7 +3,6 @@
     import MadLib from "./MadLib.svelte";
 </script>
 
-
   <Meta
     title="Mad Lib"
     component={MadLib}
@@ -18,7 +17,7 @@
 
 
   <Template let:args>
-    <svg width="300" height="300" style="border:1px gray solid">
+    <svg width="500" height="500" style="border:1px gray solid">
         <MadLib
             variable = {args.variable}
         />

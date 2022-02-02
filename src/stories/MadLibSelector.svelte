@@ -9,13 +9,9 @@
     let option2 = "parent or caregiver";
     let option3 = "teacher";
 
-    const clickDropdown = () => {
-        listboxVisible = true;
-    }
+    const openDropdown = () => { listboxVisible = true; }
 
-    const closeDropdown = () => {
-        listboxVisible = false;
-    }
+    const closeDropdown = () => { listboxVisible = false; }
 
     const clickSelectorOption = (option:string) => {
         buttonText = option;
@@ -30,9 +26,11 @@
 
 <div class="area">
     <div tabindex="0" class="selector-area" 
-        on:click={listboxVisible ? closeDropdown : clickDropdown} on:blur={choosing ? () => {} : closeDropdown}>
+        on:click={listboxVisible ? closeDropdown : openDropdown} on:blur={choosing ? () => {} : closeDropdown}>
         <div class="arrow">
-            <DropdownArrow/>
+            <svg class="svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                <path d="M0.630249 1L6.36134 6.5L12.0924 1" stroke="#2A2A2A" stroke-width="1.5"/>
+            </svg>
         </div>
         {buttonText}
     </div>      
@@ -114,6 +112,11 @@
     .arrow {
         display: inline-block;
         vertical-align: top;
+    }
+
+    .svg {
+        vertical-align: middle;
+        transform: translateY(-0.1rem);
     }
 
 </style>

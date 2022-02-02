@@ -2,17 +2,16 @@
     import MadLibSelector from "./MadLibSelector.svelte";
     export let variable: number;
 
-    let listboxVisible = false;
-    let buttonText = "MPA manager"
+    const findButtonClicked = () => {}
 
-const click = () => {
-    buttonText = "help finding examples"
-}
-
+    const userPersonaItems = ['an MPA planner', 'an MPA manager', 'a community organizer', 'LMMA practitioner'];
+    const objectiveItems = ['answers', 'examples', 'case studies', 'tools'];
+    const objectiveVerbItems = ['enable', 'evaluate'];
+    const actionSubjectItems = ['I need to make','my team will make','my government needs to make'];
 
 </script>
 
-<div class="component" on:click={click}>
+<div class="mad-lib">
     <p class="title-text">Is this not for you?</p>
     <p class="normal-text">I am an <MadLibSelector/> and want <br> <MadLibSelector/> to <MadLibSelector/> decisions <br> <MadLibSelector/></p>
     <div class="find-button">
@@ -25,7 +24,7 @@ const click = () => {
 
 <style>
 
-.component {
+.mad-lib {
     margin-left: 200px;
     position: relative;
     line-height: 40px;
@@ -71,9 +70,10 @@ const click = () => {
 }
 
 .svg-arrow {
-    display:inline-flex;
+    position: relative;
+    vertical-align: middle;
     padding-left: 0.7rem;
-    transform: rotate(-90deg) scale(1.35);
+    transform: rotate(-90deg) scale(1.35) translateX(-0.25rem);
 }
 
 

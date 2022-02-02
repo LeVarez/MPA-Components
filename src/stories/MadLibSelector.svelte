@@ -22,19 +22,15 @@
         closeDropdown();
     }
 
-    const endHover = () => {
-        choosing = false;
-    }
+    const endHover = () => { choosing = false; }
 
-    const beginHover = () => {
-        choosing = true;
-    }
+    const beginHover = () => { choosing = true; }
 
 </script>
 
 <div class="area">
-    <div class="selector-area" 
-        on:focus={listboxVisible ? closeDropdown : clickDropdown} on:click={listboxVisible ? closeDropdown : clickDropdown} on:blur={choosing ? () => {} : closeDropdown}>
+    <div tabindex="0" class="selector-area" 
+        on:click={listboxVisible ? closeDropdown : clickDropdown} on:blur={choosing ? () => {} : closeDropdown}>
         <div class="arrow">
             <DropdownArrow/>
         </div>
@@ -58,8 +54,6 @@
 </div>
 
   
-
-
 <style>
 
     .area {

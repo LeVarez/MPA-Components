@@ -1,5 +1,4 @@
 <script lang="ts">
-    import DropdownArrow from "./DropdownArrow.svelte";
     import MadLibSelector from "./MadLibSelector.svelte";
     export let variable: number;
 
@@ -15,10 +14,12 @@ const click = () => {
 
 <div class="component" on:click={click}>
     <p class="title-text">Is this not for you?</p>
-    <p>I am an <MadLibSelector/> and want <br> <MadLibSelector/> to <MadLibSelector/> decisions <br> <MadLibSelector/></p>
-
+    <p class="normal-text">I am an <MadLibSelector/> and want <br> <MadLibSelector/> to <MadLibSelector/> decisions <br> <MadLibSelector/></p>
     <div class="find-button">
         Let's find what you need
+        <svg class="svg-arrow" width="13" height="8" viewBox="0 0 13 8" fill="none">
+            <path d="M0.630249 1L6.36134 6.5L12.0924 1" stroke="#2A2A2A" stroke-width="1.5"/>
+        </svg>
     </div>
 </div>
 
@@ -48,7 +49,13 @@ const click = () => {
     margin: 0;
 }
 
+.normal-text {
+    margin-top: 0.5rem;
+}
+
 .find-button {
+    display: inline-block;
+    cursor: pointer;
     font-weight: 700;
     vertical-align: middle;
     font-size: 16px;
@@ -58,10 +65,17 @@ const click = () => {
     align-content: center;
     background: #FBE26B;
     color: black;
-    padding: 0.1rem 1rem;
+    padding: 0.1rem 0.75rem;
     border-radius: 20px 0px 0px 0px;
     filter: drop-shadow(0px -2px 8px rgba(0, 0, 0, 0.1));
 }
+
+.svg-arrow {
+    display:inline-flex;
+    padding-left: 0.7rem;
+    transform: rotate(-90deg) scale(1.35);
+}
+
 
 </style> 
 

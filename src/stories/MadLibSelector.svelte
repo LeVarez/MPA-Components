@@ -3,6 +3,7 @@
     import { scale } from 'svelte/transition';
 
     let buttonText = "MPA manager";
+    let choosing = false;
     let listboxVisible = false;
     let option1 = "MPA manager";
     let option2 = "parent or caregiver";
@@ -21,30 +22,39 @@
         closeDropdown();
     }
 
+    const endHover = () => {
+        choosing = false;
+    }
+
+    const beginHover = () => {
+        choosing = true;
+    }
+
 </script>
 
 <div class="area">
-    <div tabindex="0" class="selector-area" 
-        on:click={listboxVisible ? closeDropdown : clickDropdown} on:blur={closeDropdown}>
+    <div class="selector-area" 
+        on:focus={listboxVisible ? closeDropdown : clickDropdown} on:click={listboxVisible ? closeDropdown : clickDropdown} on:blur={choosing ? () => {} : closeDropdown}>
         <div class="arrow">
             <DropdownArrow/>
         </div>
         {buttonText}
-    </div>
+    </div>      
 
     {#if listboxVisible}
-        <div class="listbox" transition:scale>
-            <div class="option" on:click={() => clickSelectorOption("hola")}>
+        <div class="listbox" transition:scale on:mouseenter={beginHover} on:mouseleave={endHover}>
+            <div class="option" on:click={() => clickSelectorOption(option1)}>
                 {option1}
-            </div>
-            <div class="option" on:click={(option2) => clickSelectorOption}>
+            </div>  
+            <div class="option" on:click={() => clickSelectorOption(option2)}>
                 {option2}
             </div>
-            <div class="option" on:click={(option3) => clickSelectorOption}>
+            <div class="option" on:click={() => clickSelectorOption(option3)}>
                 {option3}
             </div>
-        </div>
+        </div>      
     {/if}
+
 </div>
 
   

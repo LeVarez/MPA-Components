@@ -1,6 +1,5 @@
 <script lang="ts">
     export let variable: number;
-    let width, height;
 </script>
 
 <div class="article">

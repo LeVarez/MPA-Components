@@ -17,11 +17,9 @@
 
 
   <Template let:args>
-    <svg width="500" height="500" style="border:1px gray solid">
-        <MadLib
-            variable = {args.variable}
-        />
-    </svg>
+    <MadLib
+        variable = {args.variable}
+    />
   </Template>
 
 

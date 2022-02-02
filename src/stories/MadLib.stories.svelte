@@ -24,7 +24,7 @@
 
 
   <Story
-    name="Landing page Mad Lib"
+    name="Chapter page Mad Lib"
     args={{
         variable: 10
     }}

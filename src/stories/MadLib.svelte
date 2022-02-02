@@ -13,36 +13,21 @@ const click = () => {
 
 </script>
 
-<div class="article" on:click={click}>
-    <p>I am an <MadLibSelector/> and want help finding examples to evaluate decisions my governments needs to make</p>
+<div class="component" on:click={click}>
+    <p style="font-weight:bold">Is this not for you?</p>
+    <p>I am an <MadLibSelector/> and want <br> <MadLibSelector/> to <MadLibSelector/> decisions <br> <MadLibSelector/></p>
 </div>
 
 <style>
 
-.button {
-    display: inline-block;
-    vertical-align: middle;
-    border-radius: 20px;
+.component {
+    line-height: 35px;
     background-color: #F9F9F9;
-    font-size: 20;
-    color: black;
-    border: none;
-    padding: 0.35rem 0.7rem 0.35rem 0.7rem;
-    cursor: pointer;
-    font: inherit;
-    filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.15));
-}
-
-.arrow {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.article {
-    background-color: #F9F9F9;
-    padding-top: 100px;
+    box-shadow: inset 0px 2px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 40px 0px 0px 40px;
+    padding-top: 0.5rem;
     padding-bottom: 100px;
-    padding-left: 50px;
+    padding-left: 1.5rem;
     font-family: 'Montserrat';
     font-size: 20;
     font-weight: normal;

@@ -1,6 +1,8 @@
 <script lang="ts">
     import { afterUpdate } from 'svelte/internal';
 	import { hslide } from './scripts/hslide.js';
+    import {blur, crossfade, draw, fade, fly, scale, slide} from 'svelte/transition';
+    import { backIn, backOut, linear } from 'svelte/easing';
 
     interface TextElement{
 		title: string;
@@ -13,6 +15,8 @@
     export let textColor = '#202020';
     export let currentSlide = 0;
     export let transitionTime = 10000;
+
+    let direction = 1;
 
     const transition_args = {
 		duration: 200,
@@ -39,6 +43,21 @@
         }
     })
 
+   function fadeSlide(node, options) {
+		const slideTrans = fly(node, { x: direction*-800, duration: 1000 })
+        console.log(t => `
+				${slideTrans.css(t,1)}
+				opacity: ${t};
+			`);
+		return {
+			duration: 600,
+			css: t => `
+				${slideTrans.css(t,1)}
+				opacity: ${t};
+			`
+		};
+	}
+
 </script>
 
 
@@ -48,7 +67,7 @@
     {#if currentSlide === id}
       <div  class="slide {currentSlide === id? 'active' : ''}" style="background: {backgroundColor};">
             <!--<div class="img"/>-->
-            <div class="info" in:hslide={transition_args} out:hslide={transition_args} style="color: {textColor};">
+            <div class="info" in:fadeSlide out:fly="{{ x: direction*800, duration: 1000 }}" style="color: {textColor};">
                 <div class="title">{slide.title}</div>
                 <div class="content">{slide.content}</div>
             </div>
@@ -56,8 +75,8 @@
     {/if}
     {/each}
     <div class="navigationButtons">
-        <div class="button" style="background: {buttonColor};" on:click={() => { animatonCurrentDot.cancel(); currentSlide = currentSlide - 1 < 0 ? content.length - 1 : currentSlide - 1;}}>&#10094;</div>
-        <div class="button" style="background: {buttonColor};" on:click={() =>{ animatonCurrentDot.cancel(); currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;}}>&#10095;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() => {direction = -1; animatonCurrentDot.cancel(); currentSlide = currentSlide - 1 < 0 ? content.length - 1 : currentSlide - 1;}}>&#10094;</div>
+        <div class="button" style="background: {buttonColor};" on:click={() =>{console.log(document.querySelector(".info"));direction = 1; animatonCurrentDot.cancel(); currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;}}>&#10095;</div>
     </div>
     <div class="navigationDots">
         {#each content as _slide, id}
@@ -81,11 +100,11 @@
         margin: 10px;
     }
     .img-slider .slide{
-        z-index: 1;
         position: absolute;
         width: 100%;
         height: 100%;
         border-radius: 15px;
+        overflow: hidden;
     }
 
     .img-slider .slide .img{
@@ -99,6 +118,7 @@
         top: 0;
         padding: 15px 30px;
         height: 100%;
+        z-index: 2;
     }
 
     .img-slider .slide .info .title{

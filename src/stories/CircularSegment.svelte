@@ -9,7 +9,16 @@
     export let color = '#fbe26b'
     export let borderColor = 'black'
     export let gap = 0;
-    export let clickFn : () =>{};
+    export let selected;
+    export let thicknessGain = 20;
+
+    let currentThicknessGain = thicknessGain;
+    let currentThickness = thickness;
+    let current = false;
+
+    interface PlotHTMLElement extends HTMLElement  {
+        on(eventName: string, handler: Function): void;
+    }
 
     let describeArc = (x:number, y:number, radius:number, thickness:number, startAngle:number, endAngle:number) => {
 
@@ -40,13 +49,32 @@
         };
     }
 
-    let de = describeArc(x,y,radius,thickness + 100,startAngle - gap ,endAngle + gap);
+    $: if(selected !== null && selected.startAngle == startAngle && !current){
+        current = true;
+        let animation = document.querySelector('#selectionStart' + startAngle) as SVGAnimationElement;
+        console.log(animation)
+        animation.beginElement();
+
+    }else{
+
+        if(current){
+            let animation = document.querySelector('#selectionEnd' + startAngle) as SVGAnimationElement;
+            console.log(animation);
+            animation.beginElement();
+        }
+        current = false;
+
+    }
 </script>
 
 
-<path class="segment" fill={color} stroke={borderColor} d={describeArc(x,y,radius,thickness,startAngle + gap/2 ,endAngle - gap/2)} on:click={clickFn}>
-    <animate begin="mouseover" attributeName="d" to={describeArc(x,y,radius,thickness + 20,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
-    <animate begin="mouseout" attributeName="d" to={describeArc(x,y,radius,thickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+<path class="segment" fill={color} stroke={borderColor} d={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} on:click>
+    <animate begin="mouseover" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+    {#if !current}
+    <animate begin="mouseout" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+    {/if}
+    <animate begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" id='selectionEnd{startAngle}'/>
+    <animate begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" id='selectionStart{startAngle}'/>
 </path>
 
 <style>

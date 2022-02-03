@@ -2,7 +2,7 @@
     import MadLibSelector from "./MadLibSelector.svelte";
     export let variable: number;
 
-    const findButtonClicked = () => {}
+    const findButtonClicked = () => {alert("LET'S FIND WHAT YOU NEED BUTTON CLICKED");}
 
     const userPersonaItems = ['an MPA planner', 'an MPA manager', 'a community organizer', 'LMMA practitioner'];
     const objectiveItems = ['answers', 'examples', 'case studies', 'tools'];

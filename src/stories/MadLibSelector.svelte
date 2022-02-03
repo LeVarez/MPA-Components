@@ -11,6 +11,8 @@
 
     const selectDropdownOption = (option:string) => { buttonText = option; listboxVisible = false; }
 
+    const chooseOption = (index:number) => {currentIndex = index; buttonText = options[currentIndex];}
+
     function hola(){
         console.log("FOCUS");
     }
@@ -49,9 +51,9 @@
     {#if listboxVisible}
         
         <ul class="listbox" transition:scale>
-            {#each options as opt}
+            {#each options as opt, i}
                 <li class={options[currentIndex] === opt ? "option-selected" : "option"}
-                    on:focus={hola} on:blur={loseFocus} on:click={() => selectDropdownOption(opt)} tabindex="0">
+                    on:focus={() => chooseOption(i)} on:blur={loseFocus} tabindex="0">
                     {opt}
                 </li>  
             {/each}

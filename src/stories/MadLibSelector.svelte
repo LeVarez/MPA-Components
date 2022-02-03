@@ -1,52 +1,61 @@
 <script lang="ts">
-    import DropdownArrow from "./DropdownArrow.svelte";
     import { scale } from 'svelte/transition';
-
-    let buttonText = "MPA manager";
-    let choosing = false;
+    let currentIndex = 0;
+    let options = ['an MPA planner', 'an MPA manager', 'a community organizer', 'LMMA practitioner'];
+    let buttonText = options[currentIndex];
     let listboxVisible = false;
-    let option1 = "MPA manager";
-    let option2 = "parent or caregiver";
-    let option3 = "teacher";
-
+    
     const openDropdown = () => { listboxVisible = true; }
 
-    const closeDropdown = () => { listboxVisible = false; }
+    const closeDropdown = (e) => { listboxVisible = false; console.log("FOCUS LOST ARRIBA"); }
 
-    const clickSelectorOption = (option:string) => {
-        buttonText = option;
-        closeDropdown();
+    const selectDropdownOption = (option:string) => { buttonText = option; listboxVisible = false; }
+
+    function hola(){
+        console.log("FOCUS");
     }
 
-    const endHover = () => { choosing = false; }
+    const loseFocus = () => {
+        console.log("FOCUS LOST LI");
+    }
 
-    const beginHover = () => { choosing = true; }
+    const handleKeyDown = ({keyCode}) => {
+        if (listboxVisible){
+            if (keyCode === 38 && currentIndex > 0){
+                currentIndex--;
+                buttonText = options[currentIndex];
+            }
+            else if (keyCode === 40 && currentIndex < options.length-1){
+                currentIndex++;
+                buttonText = options[currentIndex];
+            }
+        }
+    }
 
 </script>
 
-<div class="area">
-    <div tabindex="0" class="selector-area" 
-        on:click={listboxVisible ? closeDropdown : openDropdown} on:blur={choosing ? () => {} : closeDropdown}>
-        <div class="arrow">
+<svelte:window on:keydown={handleKeyDown} />
+
+<div class="area" >
+    <button class="selector-area" on:click={listboxVisible ? closeDropdown : openDropdown} on:blur={(e) => closeDropdown(e)}>
+        <div class="arrow"> 
             <svg class="svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
                 <path d="M0.630249 1L6.36134 6.5L12.0924 1" stroke="#2A2A2A" stroke-width="1.5"/>
             </svg>
         </div>
-        {buttonText}
-    </div>      
+        {buttonText}    
+    </button>      
 
     {#if listboxVisible}
-        <div class="listbox" transition:scale on:mouseenter={beginHover} on:mouseleave={endHover}>
-            <div class="option" on:click={() => clickSelectorOption(option1)}>
-                {option1}
-            </div>  
-            <div class="option" on:click={() => clickSelectorOption(option2)}>
-                {option2}
-            </div>
-            <div class="option" on:click={() => clickSelectorOption(option3)}>
-                {option3}
-            </div>
-        </div>      
+        
+        <ul class="listbox" transition:scale>
+            {#each options as opt}
+                <li class={options[currentIndex] === opt ? "option-selected" : "option"}
+                    on:focus={hola} on:blur={loseFocus} on:click={() => selectDropdownOption(opt)} tabindex="0">
+                    {opt}
+                </li>  
+            {/each}
+        </ul>      
     {/if}
 
 </div>
@@ -67,14 +76,23 @@
         padding: 0.5rem 0.5rem 0.5rem 0.5rem;
         cursor: pointer;
         font-family: 'Montserrat';
-        font-size: 20;
+        font-size: 20px;
         font-weight: normal; 
     }
 
-    .option:selected {
-        border: khaki;
+    .option-selected {
+        display: block;
+        background-color: #F9F9F9;
+        color: black;
+        border: none;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        cursor: pointer;
+        font-family: 'Montserrat';
+        font-size: 20px;
+        font-weight: normal;
+        filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.15));
+        border-radius: 10px;
     }
-
 
     .option:hover{
         filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.15));
@@ -88,11 +106,11 @@
         background-color: #F9F9F9;
         color: black;
         border: none;
-        padding: 0.35rem 0.7rem 0.35rem 0.7rem;
+        padding: 0.25rem 0.7rem 0.25rem 0.7rem;
         cursor: pointer;
         filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.15));
         font-family: 'Montserrat';
-        font-size: 20;
+        font-size: 20px;
         font-weight: normal;
     }
 

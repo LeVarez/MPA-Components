@@ -5,6 +5,7 @@
      */
   export let active = false
   export let progress = false;
+  export let color = '#2D2B2F';
 
   let animatonCurrentDot;
   const dispatch = createEventDispatcher();
@@ -32,11 +33,11 @@
 </script>
 
 {#if active && progress}
-  <div class="progressContainer"  style="background-color: rgba(130, 130, 130, 0.3);">
-    <div class="progressBar" style="background-color: black; display: block"  on:click/>
+  <div class="progressContainer"  style="background-color: {color}80;">
+    <div class="progressBar" style="background-color: {color}; display: block"  on:click/>
   </div>
 {:else}
-  <div class="dot" class:active={active}  on:click/>
+  <div class="dot" class:active={active} style="background-color: {color};" on:click/>
 {/if}
 
 
@@ -47,7 +48,6 @@
     --dot-size: 10px
   }
   .dot {
-    background: black;
     border-radius: 50%;
     display: inline-block;
     opacity: 0.5;

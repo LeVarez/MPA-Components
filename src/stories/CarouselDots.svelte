@@ -17,6 +17,8 @@
      */
     export let currentPageIndex = 0
 
+    export let color = 'black';
+
     function handleDotClick(pageIndex) {
       dispatch('pageChange', pageIndex)
     }
@@ -28,6 +30,7 @@
         <Dot
           progress={progress}
           active={currentPageIndex === pageIndex}
+          color={color}
           on:click={() => handleDotClick(pageIndex)}
           on:progressAnimationFinished={() => handleDotClick(currentPageIndex + 1)}
         ></Dot>

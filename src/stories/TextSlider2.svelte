@@ -84,6 +84,7 @@
           currentPageIndex={currentSlide}
           pagesCount={content.length}
           progress={true}
+          color={textColor}
           on:pageChange={(event) => {handleDotClick(event.detail)}}
           ></CarouselDots>
     </div>

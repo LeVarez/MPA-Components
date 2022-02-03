@@ -1,19 +1,23 @@
 <script lang="ts">
     import MadLibSelector from "./MadLibSelector.svelte";
-    export let variable: number;
 
-    const findButtonClicked = () => {alert("LET'S FIND WHAT YOU NEED BUTTON CLICKED");}
-
-    const userPersonaItems = ['an MPA planner', 'an MPA manager', 'a community organizer', 'LMMA practitioner'];
-    const objectiveItems = ['answers', 'examples', 'case studies', 'tools'];
-    const objectiveVerbItems = ['enable', 'evaluate'];
-    const actionSubjectItems = ['I need to make','my team will make','my government needs to make'];
+    const typeUserList = ['an MPA planner', 'an MPA manager', 'a community organizer', 'an LMMA practitioner'];
+    const objectiveList = ['answers', 'examples', 'case studies', 'tools'];
+    const objectiveVerbList = ['enable', 'evaluate'];
+    const actionSubjectList = ['I need to make','my team will make','my government needs to make'];
+    const findButtonClicked = () => { alert("USER PERSONA: \n1: " + userPersona[0] + "\n2: " + userPersona[1] + "\n3: " + userPersona[2] + "\n4: " + userPersona[3]); }
+    
+    let typeUser:string, objective:string, objectiveVerb: string, actionSubject: string;
+    let userPersona: string[];
+    $: userPersona = [typeUser, objective, objectiveVerb, actionSubject];
 
 </script>
 
 <div class="mad-lib">
     <p class="title-text">Is this not for you?</p>
-    <p class="normal-text">I am an <MadLibSelector/> and want <br> <MadLibSelector/> to <MadLibSelector/> decisions <br> <MadLibSelector/></p>
+    <p class="normal-text">I am <MadLibSelector options={typeUserList} bind:selected={typeUser}/> and want 
+        <br> <MadLibSelector options={objectiveList} bind:selected={objective}/> to <MadLibSelector options={objectiveVerbList} bind:selected={objectiveVerb}/> 
+        decisions <br> <MadLibSelector options={actionSubjectList} bind:selected={actionSubject}/></p>
     <button class="find-button" tabindex="0" on:click={findButtonClicked}>
         Let's find what you need
         <svg class="svg-arrow" width="13" height="8" viewBox="0 0 13 8" fill="none">

@@ -15,18 +15,12 @@
     }}
   />
 
-
   <Template let:args>
-    <MadLib
-        variable = {args.variable}
-    />
+    <MadLib/>
   </Template>
-
 
   <Story
     name="Chapter page Mad Lib"
-    args={{
-        variable: 10
-    }}
+    args={{}}
   />
 

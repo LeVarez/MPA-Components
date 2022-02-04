@@ -1,10 +1,6 @@
 <script lang="ts">
-    import MadLibSelector from "./MadLibSelector.svelte";
     import MadLibSelectorLanding from "./MadLibSelectorLanding.svelte";
     import TourButton from "./TourButton.svelte";
-
-    const arrowUnicode = `&#x2193`;
-    const imagePath = './render.jpg';
  
     const typeUserList = ['an MPA planner', 'an MPA manager', 'a community organizer', 'an LMMA practitioner'];
     const objectiveList = ['answers', 'examples', 'case studies', 'tools'];
@@ -20,43 +16,51 @@
 
 </script>
 
-<img src={imagePath} alt="background" width="500" height="500"/>
-
-<div class="mad-lib">
-    <h2>{@html arrowUnicode}</h2>
-    
-    <p class="title-text">Is this not for you?</p>
-    <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want help finding
-        <br><MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/> 
-        decisions <br> <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
-    <span>
+<div class="mad-lib" bind:clientWidth={width} bind:clientHeight={height}>
+    <div class="background-image" {width} {height}/>
+    <p class="upper-text">Find information relevant<br>to you.</p>
+    <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want help<br>
+        finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
+        <br>decisions <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
+    <div class="button-area">
         <TourButton/>
-    </span>
+    </div>
     
 </div>
 
 
 <style>
 
+    .background-image {
+        background: url("/img/madlib_background_image.png");
+        opacity: 60%;
+        z-index: 100;
+    }
+
+    .button-area {
+        margin-left: -1.35rem;
+    }
+
+    .upper-text {
+        font-family: 'Montserrat';
+        font-weight: 300;
+        font-size: 48px;
+        line-height: 58.5px;
+        padding-top: 6rem;
+    }
+
     .mad-lib {
-        margin-left: 200px;
         position: relative;
         line-height: 40px;
         color: #FFFFFF;
-        background-color: darkslategrey;
+        background: #096EAE;
         padding-top: 0.5rem;
         padding-bottom: 2rem;
-        padding-left: 1.5rem;
+        padding-left: 7rem;
         font-family: 'Montserrat';
         font-weight: 300;
         font-size: 32px;
-    }
-
-    .title-text {
-        color: black;
-        font-weight: 700;
-        font-size: 16px;
-        margin: 0;
+        height: 750px;
     }
 
     .normal-text {

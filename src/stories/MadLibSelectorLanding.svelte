@@ -116,14 +116,4 @@
         z-index: 1000;
     }
 
-    .arrow {
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    .svg {
-        vertical-align: middle;
-        transform: translateY(-0.1rem);
-    }
-
 </style>

@@ -44,8 +44,6 @@
 
 </script>
 
-<br><br>
-
 <div class="button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:focus={handleFocus}>
     <p class="text">Start your tour</p>
     <span use:boop={{isBooped, x: 5, timing: 200, setter: setIsBooped}}>

@@ -44,6 +44,8 @@
 
 </script>
 
+<br><br>
+
 <div class="button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:focus={handleFocus}>
     <p class="text">Start your tour</p>
     <span use:boop={{isBooped, x: 5, timing: 200, setter: setIsBooped}}>
@@ -76,6 +78,14 @@
         border: none;
         background-color: #FBE26B;
         cursor: pointer;
+        display: inline-block;
+        font-family: 'Montserrat';
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 40px;
+        margin: 0px;
+        color: #2A2A2A;
+        font-size: 20px;
     }
 
     .svg-arrow {

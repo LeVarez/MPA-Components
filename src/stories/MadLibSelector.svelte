@@ -44,7 +44,7 @@
         <ul class="listbox" transition:scale>
             {#each options as opt, i}
                 <li class={options[currentIndex] === opt ? "option-selected" : "option"}
-                    on:focus={() => chooseOption(i)} tabindex="0">
+                    on:focus={() => chooseOption(i)} tabindex="-1">
                     {opt}
                 </li>  
             {/each}
@@ -99,6 +99,7 @@
         color: black;
         border: none;
         padding: 0.25rem 0.7rem 0.25rem 0.7rem;
+        margin-bottom: 0.4rem;
         cursor: pointer;
         filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.15));
         font-family: 'Montserrat';

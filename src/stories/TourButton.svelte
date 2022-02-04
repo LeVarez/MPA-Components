@@ -69,21 +69,16 @@
         display: inline-block;
         position: relative;
         border-radius: 24px;
-        padding-left: 1.35rem;
-        padding-top: 0.3rem;
-        padding-bottom: 0.3rem;
-        padding-right: 1.5rem;
+        padding: 0.3rem 1.5rem 0.3rem 1.35rem;
         border: none;
         background-color: #FBE26B;
+        color: #2A2A2A;
         cursor: pointer;
-        display: inline-block;
         font-family: 'Montserrat';
         font-size: 20px;
         font-weight: bold;
         line-height: 40px;
         margin: 0px;
-        color: #2A2A2A;
-        font-size: 20px;
     }
 
     .svg-arrow {

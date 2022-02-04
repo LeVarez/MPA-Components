@@ -16,25 +16,24 @@
 
 </script>
 
-<div class="mad-lib" bind:clientWidth={width} bind:clientHeight={height}>
-    <div class="background-image" {width} {height}/>
-    <p class="upper-text">Find information relevant<br>to you.</p>
-    <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want help<br>
-        finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
-        <br>decisions <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
-    <div class="button-area">
-        <TourButton/>
+<div class="container" bind:clientWidth={width} bind:clientHeight={height}>
+    <div class="mad-lib" {width} {height}>
+        <p class="upper-text">Find information relevant<br>to you.</p>
+        <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want help<br>
+            finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
+            <br>decisions <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
+        <div class="button-area">
+            <TourButton/>
+        </div>
     </div>
-    
 </div>
-
 
 <style>
 
-    .background-image {
-        background: url("/img/madlib_background_image.png");
-        opacity: 60%;
-        z-index: 100;
+    .container {
+        background: url("/img/madlib_background_image.png") fixed no-repeat content-box;
+        background-size: contain;
+        position: relative;
     }
 
     .button-area {
@@ -53,7 +52,6 @@
         position: relative;
         line-height: 40px;
         color: #FFFFFF;
-        background: #096EAE;
         padding-top: 0.5rem;
         padding-bottom: 2rem;
         padding-left: 7rem;

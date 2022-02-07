@@ -19,9 +19,7 @@
 
     export let color = 'black';
 
-    function handleDotClick(pageIndex) {
-      dispatch('pageChange', pageIndex)
-    }
+    export let handleDotClick;
   </script>
 
   <div class="sc-carousel-dots__container">
@@ -31,8 +29,8 @@
           progress={progress}
           active={currentPageIndex === pageIndex}
           color={color}
-          on:click={() => handleDotClick(pageIndex)}
-          on:progressAnimationFinished={() => handleDotClick(currentPageIndex + 1)}
+          on:click={handleDotClick(pageIndex)}
+          on:progressAnimationFinished={handleDotClick(currentPageIndex + 1)}
         ></Dot>
       </div>
     {/each}

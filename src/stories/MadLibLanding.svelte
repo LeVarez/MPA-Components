@@ -13,7 +13,6 @@
     $: userPersona = [typeUser, objective, objectiveVerb, actionSubject];
 
     let width:number, height:number;
-
 </script>
 
 <div class="container" bind:clientWidth={width} bind:clientHeight={height}>
@@ -23,7 +22,7 @@
             finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
             <br>decisions <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
         <div class="button-area">
-            <TourButton/>
+            <TourButton handleSubmit={tourButtonClicked}/>
         </div>
     </div>
 </div>

@@ -2,6 +2,8 @@
 
     import { spring } from 'svelte/motion';
 
+    export let handleSubmit;
+
     let isBooped = false;
 
     function setIsBooped(val){
@@ -14,6 +16,7 @@
 
     function handleClick() {
 		isBooped = true;
+        handleSubmit();
 	}
 
     function boop(node, params) {	

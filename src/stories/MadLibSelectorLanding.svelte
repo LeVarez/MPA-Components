@@ -103,6 +103,10 @@
         font-weight: 600;
     }
 
+    .selector-area:focus {
+        outline: 0.1rem solid #F9F9F9;
+    }
+
     .listbox {
         margin-top: 0.5rem;
         position: absolute;

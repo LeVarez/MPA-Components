@@ -48,6 +48,6 @@
     args={{cardType: 'case study',
             previewImage: "/img/case-study-preview-image.png",
             category: 'Sustainable financing',
-            title: `<b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification`,
+            title: '<b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification',
             tags: tagArray }}
 />

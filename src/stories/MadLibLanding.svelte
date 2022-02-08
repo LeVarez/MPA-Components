@@ -17,9 +17,9 @@
 
 <div class="container" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="mad-lib" {width} {height}>
-        <p class="upper-text">Find information relevant<br>to you.</p>
-        <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want help<br>
-            finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
+        <p class="upper-text">Find information relevant to you.</p>
+        <p class="normal-text">I am <MadLibSelectorLanding options={typeUserList} bind:selected={typeUser}/> and want<br>
+            help finding <MadLibSelectorLanding options={objectiveList} bind:selected={objective}/> to <MadLibSelectorLanding options={objectiveVerbList} bind:selected={objectiveVerb}/>
             <br>decisions <MadLibSelectorLanding options={actionSubjectList} bind:selected={actionSubject}/></p>
         <div class="button-area">
             <TourButton handleSubmit={tourButtonClicked}/>
@@ -45,6 +45,7 @@
         font-size: 48px;
         line-height: 58.5px;
         padding-top: 6rem;
+        max-width: 620px;
     }
 
     .mad-lib {
@@ -62,6 +63,7 @@
 
     .normal-text {
         margin-top: 0.5rem;
+        max-width: 750px;
     }
 
 </style> 

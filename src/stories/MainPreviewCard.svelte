@@ -1,20 +1,19 @@
 <script lang="ts">
 
     export let cardType: 'chapter' | 'case study';
+    export let category: string;
+    export let title: string;
+    export let previewImage: string;
 
 </script>
 
-<div class="container">
+<div class={cardType === 'chapter' ? 'container chapter' : 'container case-study'}>
     <div class="preview-image">
-        <img class="image" width="766" height="344"src="/img/chapter-preview-image.png" alt="preview">
+        <img class="image" width="766" height="344" src={previewImage} alt="preview">
     </div>
     <div class="preview-content">
-        <div class="preview-category-text">
-            <p>Sustainable financing</p>
-        </div>
-        <div class="preview-title">
-
-        </div>
+        <div class="preview-category-text">{category}</div>
+        <div class="preview-title">{@html title}</div>
         <div class="button">
 
         </div>
@@ -27,10 +26,19 @@
 
 <style>
 
+    .preview-title {
+        font-weight: 275;
+        font-size: 32px;
+        max-width: 570px;
+        margin-top: 0px;
+    }
+
     .preview-category-text {
         font-weight: 700;
         font-size: 20px;
-
+        max-width: 720px;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .preview-content {
@@ -46,10 +54,17 @@
     .container {
         width: 766px;
         height: 671px;
-        background: #096EAE;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
         border-radius: 40px;
         border: none;
+    }
+
+    .chapter {
+        background: #096EAE;
+    }
+
+    .case-study {
+        background: #311E5D;
     }
 
     .preview-image {

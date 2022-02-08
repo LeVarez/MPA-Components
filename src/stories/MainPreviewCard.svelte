@@ -9,6 +9,7 @@
     export let previewImage: string;
 
     let isBooped = false;
+    let render = true;
 
     function setIsBooped(val){
         isBooped = val;
@@ -22,24 +23,33 @@
         
     }
 
-    function loseFocus() {
+    function loseMouse() {
         isBooped = false;
-        console.log("lost focus!!!");
     }
+
+    function loseFocus() {
+        render = false;
+        render = true
+        console.log("HA PERDIDO FOCUS");
+    }
+
+
 
 </script>
 
-<div class={cardType === 'chapter' ? 'container chapter' : 'container case-study'}>
+<div class={cardType === 'chapter' ? 'container chapter' : 'container case-study'} tabindex="0">
     <div class="preview-image">
         <img class="image" width="766" height="344" src={previewImage} alt="preview">
     </div>
     <div class="preview-content">
-        <div class="circle-button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:mouseleave={loseFocus}>
-            <span use:boop={{isBooped, x: 5, timing: 200, setter: setIsBooped}}>
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
-                    <path d="M1.1814 19L9.81849 10L1.1814 1" stroke="#2A2A2A" stroke-width="2.4"/>
-                </svg>
-            </span>        
+        <div class="circle-button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:mouseleave={loseMouse} on:blur={loseFocus}>
+            {#if render}
+                <span use:boop={{isBooped, x: 5, timing: 200, setter: setIsBooped}}>
+                    <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+                        <path d="M1.1814 19L9.81849 10L1.1814 1" stroke="#2A2A2A" stroke-width="2.4"/>
+                    </svg>
+                </span>   
+            {/if}     
         </div>
         <div class="preview-category-text">{category}</div>
         <div class="preview-title">{@html title}</div>
@@ -64,6 +74,7 @@
         margin-right: 1.5rem;
         margin-top: 0.25rem;
         cursor: pointer;
+        outline-color: white;
     }
 
     .tags-title {
@@ -112,6 +123,7 @@
 
     .chapter {
         background: #096EAE;
+        outline-color: black;
     }
 
     .case-study {

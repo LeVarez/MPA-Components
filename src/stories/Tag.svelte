@@ -21,7 +21,7 @@
 
 </script>
 
-<div class={style} on:click={clickTag}>{tag}</div>
+<div class={style} on:click={clickTag} tabindex="0">{tag}</div>
 
 <style>
 

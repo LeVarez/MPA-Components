@@ -2,12 +2,14 @@
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
     import TextSlider from "./TextSlider.svelte";
     import content from './data/TextSlider.json';
+
+    let currentPageIndex = 0;
 </script>
 
   <!-- More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export -->
   <!-- More on argTypes: https://storybook.js.org/docs/svelte/api/argtypes -->
   <Meta
-    title="Text Slider"
+    title="Text Slider3"
     component={TextSlider}
     argTypes={{
       backgroundColor: { control: "color" },
@@ -20,13 +22,16 @@
 
   <!-- More on component templates: https://storybook.js.org/docs/svelte/writing-stories/introduction#using-args -->
   <Template let:args>
-    <TextSlider
+    <div style="width: 800px; height: 400px;">
+      <TextSlider
+        bind:currentPageIndex={currentPageIndex}
         content={args.content}
         backgroundColor={args.backgroundColor}
         buttonColor={args.buttonColor}
         textColor={args.textColor}
         transitionTime={args.transitionTime}
-    />
+      />
+  </div>
   </Template>
 
   <!-- More on args: https://storybook.js.org/docs/svelte/writing-stories/args -->

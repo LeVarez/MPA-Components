@@ -1,14 +1,14 @@
 <script>
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
-    import TextSlider3 from "./TextSlider3.svelte";
-    import content from './data/TextSlider.json';
+    import LifeCycle from "./LifeCycle.svelte";
+    import content from './data/LifeCycle.json';
 </script>
 
   <!-- More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export -->
   <!-- More on argTypes: https://storybook.js.org/docs/svelte/api/argtypes -->
   <Meta
-    title="Text Slider3"
-    component={TextSlider3}
+    title="Life Cycle"
+    component={LifeCycle}
     argTypes={{
       backgroundColor: { control: "color" },
       size: {
@@ -21,12 +21,10 @@
   <!-- More on component templates: https://storybook.js.org/docs/svelte/writing-stories/introduction#using-args -->
   <Template let:args>
     <div style="width: 800px; height: 400px;">
-      <TextSlider3
+      <LifeCycle
+        title={args.title}
         content={args.content}
-        backgroundColor={args.backgroundColor}
-        buttonColor={args.buttonColor}
-        textColor={args.textColor}
-        transitionTime={args.transitionTime}
+        componentsColor={args.componentsColor}
       />
   </div>
   </Template>
@@ -35,20 +33,13 @@
   <Story
     name="Yellow"
     args={{
-      content: content,
-      backgroundColor: "#fbe26b",
-      buttonColor: "#fbe26b",
-      textColor: "#202020",
-      transitionTime: 10000,
+        title: "What's the <b> MPA management life cycle</b>",
+        content: content,
+        componentsColor:{
+                backgroundColor: "#fbe26b",
+                buttonColor: "#fbe26b",
+                textColor: "#202020",
+        },
     }}
   />
-  <Story
-    name="Blue"
-    args={{
-      content: content,
-      backgroundColor: "#096fae",
-      buttonColor: "#66cfd6",
-      textColor: "#f9f9f9",
-      transitionTime: 10000,
-    }}
-  />
+

@@ -1,315 +1,145 @@
 <script lang="ts">
-    import { afterUpdate } from 'svelte/internal';
-	import { hslide } from './scripts/hslide.js';
-    import {blur, crossfade, draw, fade, fly, scale, slide} from 'svelte/transition';
-    import { backIn, backOut, linear } from 'svelte/easing';
+    import CarouselDots from './CarouselDots.svelte';
+    import Carousel from 'svelte-carousel/src/components/Carousel/Carousel.svelte';
+    import { onMount } from 'svelte';
+
+    export let content:TextElement[] = [];
+    export let backgroundColor = '#fbe26b';
+    export let buttonColor = '#fbe26b';
+    export let textColor = '#202020';
+
+    export let currentPageIndex = 0;
 
     interface TextElement{
 		title: string;
 		content: string;
     }
+    let width
+    let carousel
 
-	export let content:TextElement[] = [];
-    export let backgroundColor = '#fbe26b';
-    export let buttonColor = '#fbe26b';
-    export let textColor = '#202020';
-    export let currentSlide = 0;
-    export let transitionTime = 10000;
+    let handlePageNext = (event) => {
+        carousel.goToNext();
+    }
+    let handlePagePrev = (event) => {
+        carousel.goToPrev();
+    }
 
-    let direction = 1;
+    let goTo = (page: number) => {
+        if(carousel != undefined && carousel != null) carousel.goTo(page)
+    }
 
-    const transition_args = {
-		duration: 200,
-	}
-
-
-    let animatonCurrentDot
-
-    afterUpdate(() => {
-        animatonCurrentDot = document.querySelector('.img-slider .navigationDots .button.active .progress').animate([
-            // keyframes
-            { width: 0 },
-            { width: '100%' },
-
-        ],
-        {
-            // timing options
-            duration: transitionTime,
-            iterations: 1,
-        });
-
-        animatonCurrentDot.onfinish = function(e) {
-            currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;
-        }
-    })
-
-   function fadeSlide(node, options) {
-		const slideTrans = fly(node, { x: direction*-800, duration: 1000 })
-        console.log(t => `
-				${slideTrans.css(t,1)}
-				opacity: ${t};
-			`);
-		return {
-			duration: 600,
-			css: t => `
-				${slideTrans.css(t,1)}
-				opacity: ${t};
-			`
-		};
-	}
+    $: if(currentPageIndex >= 0){ goTo(currentPageIndex) }
 
 </script>
+{@debug currentPageIndex}
+<div class="container">
+    <div class="navigationButtons" style="">
+        <div on:click={handlePagePrev} class="button prev" style="background-color: {buttonColor};">
+            &#10094;
+        </div>
+        <div on:click={handlePageNext} class="button next" style="background-color: {buttonColor};">
+            &#10095;
+        </div>
+    </div>
+    <Carousel
+        bind:currentPageIndex={currentPageIndex}
 
-
-
-<div class="img-slider">
-    {#each content as slide, id}
-    {#if currentSlide === id}
-      <div  class="slide {currentSlide === id? 'active' : ''}" style="background: {backgroundColor};">
+        let:pagesCount
+        let:showPage
+        let:showPrevPage
+        let:showNextPage
+        bind:this={carousel}
+    >
+        {#each content as slide, id}
+        <div  class="slide" style="background: {backgroundColor};" bind:clientWidth={width}>
             <!--<div class="img"/>-->
-            <div class="info" in:fadeSlide out:fly="{{ x: direction*800, duration: 1000 }}" style="color: {textColor};">
+            <div class="info" style="color: {textColor};">
                 <div class="title">{slide.title}</div>
                 <div class="content">{slide.content}</div>
             </div>
         </div>
-    {/if}
-    {/each}
-    <div class="navigationButtons">
-        <div class="button" style="background: {buttonColor};" on:click={() => {direction = -1; animatonCurrentDot.cancel(); currentSlide = currentSlide - 1 < 0 ? content.length - 1 : currentSlide - 1;}}>&#10094;</div>
-        <div class="button" style="background: {buttonColor};" on:click={() =>{console.log(document.querySelector(".info"));direction = 1; animatonCurrentDot.cancel(); currentSlide = currentSlide + 1 >= content.length ? 0 : currentSlide + 1;}}>&#10095;</div>
-    </div>
-    <div class="navigationDots">
-        {#each content as _slide, id}
-        <div class="button {currentSlide === id? 'active' : ''}"  style="background: {textColor}{currentSlide === id? '20': ''}; opacity: {currentSlide === id? '1' : '0.2'};" on:click={() => { animatonCurrentDot.cancel(); currentSlide = id;}}>
-            {#if currentSlide === id}
-            <div class="progress"  style="background-color: {textColor};"/>
-            {/if}
-        </div>
         {/each}
-    </div>
+        <div slot="dots" class="custom-dots">
+            <CarouselDots
+            currentPageIndex={currentPageIndex}
+            pagesCount={content.length}
+            progress={true}
+            color={textColor}
+            handleDotClick={showPage}/>
+        </div>
+    </Carousel>
 </div>
 
-
-
-
 <style>
-    .img-slider{
-        position: relative;
-        width: 800px;
-        height: 300px;
-        margin: 10px;
-    }
-    .img-slider .slide{
-        position: absolute;
-        width: 100%;
-        height: 100%;
+    :global(.sc-carousel__pages-window){
         border-radius: 15px;
-        overflow: hidden;
-    }
-
-    .img-slider .slide .img{
         z-index: 1;
-        width: 100%;
     }
-
-    .img-slider .slide .info{
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-        position: absolute;
-        top: 0;
-        padding: 15px 30px;
+    :global(.sc-carousel__arrow-container){
+        display: none !important;
+    }
+    :global(.sc-carousel__carousel-container){
+        width: 100% !important;
+        height: 100% !important;
+    }
+    :global(.sc-carousel__content-container){
         height: 100%;
-        z-index: 2;
     }
 
-    .img-slider .slide .info .title{
-        font-size: 16px;
-        font-weight: 700;
-
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .img-slider .slide .info .content{
-        font-size: 16px;
-        width: 100%;
-
-        border-radius: 5px;
-        max-height: 170px;
-        overflow: hidden;
-    }
-
-    .img-slider .navigationDots{
-        z-index: 2;
-        position: absolute;
-        display: flex;
-        bottom: 30px;
-        padding-left: 30px;
-    }
-
-    .img-slider .navigationDots .button{
-        width: 12px;
-        height: 12px;
-        margin-right: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: width 0.1s;
-    }
-
-    .img-slider .navigationDots .button.active{
-        width: 90px;
-        border-radius: 10px;
-        align-items: center;
-        justify-content: flex-start;
-        display: flex;
+    .container{
         position: relative;
-        z-index: 1;
-        transition: width 0.5s;
+        height: 100%;
+        width: 100%;
     }
-
-    .img-slider .navigationDots .button.active .progress{
-        opacity: 1 !important;
-        position: flex;
-        width: 0;
-        height: 12px;
-        border-radius: 10px;
+    .navigationButtons{
+        width: 100px;
+        display: inline-flex;
+        position: absolute;
         z-index: 2;
+        right: 0;
+        margin-top: 20px;
+        margin-right: 20px;
     }
-
-    .img-slider .navigationDots .button:hover{
-        opacity: 1 !important;
-    }
-
-    .img-slider .navigationButtons{
+    .custom-dots{
         z-index: 2;
         position: absolute;
-        display: flex;
-        top: 30px;
-        right: 0%;
-        transform: translateX(-25%);
-        align-items: center;
-    }
+        bottom: 10px;
+        left: 0;
 
-    .img-slider .navigationButtons .button{
+    }
+    .navigationButtons .button{
         border: rgba(0, 0, 0, 0.1) solid 1px;
         width: 40px;
         height: 40px;
         border-radius: 50%;
         cursor: pointer;
-        margin-left: 10px;
+        margin-right: 10px;
         text-align: center;
         line-height: 40px;
     }
-    .img-slider .navigationButtons .button:hover{
+    .navigationButtons .button:hover{
         box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
     }
-
-    @media (max-width: 830px){
-        .img-slider{
-            width: 600px;
-            height: 375px;
-        }
-
-        .img-slider .slide .info{
-            padding: 10px 25px;
-        }
-
-        .img-slider .slide .info .title{
-            font-size: 35px;
-        }
-
-        .img-slider .slide .info .content{
-            font-size: 15px;
-            max-height: 220px;
-        }
-
-        .img-slider .navigationDots{
-            bottom: 25px;
-        }
-
-        .img-slider .navigationDots .button{
-            width: 10px;
-            height: 10px;
-            margin: 8px;
-        }
-        .img-slider .navigationDots .button.active{
-            width: 90px;
-        }
-        .img-slider .navigationDots .button.active .progress{
-            height: 10px;
-        }
+    .slide{
+        overflow: hidden;
+        height: auto;
+        width: auto;
     }
-
-    @media (max-width: 620px){
-        .img-slider{
-            width: 400px;
-            height: 250px;
-        }
-
-        .img-slider .slide .info{
-            padding: 10px 20px;
-        }
-
-        .img-slider .slide .info .title{
-            font-size: 30px;
-        }
-
-        .img-slider .slide .info .content{
-            font-size: 13px;
-            max-height: 120px;
-        }
-
-        .img-slider .navigationDots{
-            bottom: 15px;
-        }
-
-        .img-slider .navigationDots .button{
-            width: 8px;
-            height: 8px;
-            margin: 6px;
-        }
-        .img-slider .navigationDots .button.active{
-            width: 70px;
-        }
-        .img-slider .navigationDots .button.active .progress{
-            height: 8px;
-        }
-        .img-slider .navigationButtons .button{
-            width: 35px;
-            height: 35px;
-        }
-        .img-slider .navigationButtons .button{
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
-        }
+    .info{
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        top: 0;
+        padding: 15px 30px;
+        height: 80%;
     }
-
-    @media (max-width: 420px){
-        .img-slider{
-            width: 320px;
-            height: 200px;
-        }
-
-        .img-slider .slide .info{
-            padding: 5px 10px;
-        }
-
-        .img-slider .slide .info .title{
-            font-size: 25px;
-        }
-
-        .img-slider .slide .info .content{
-            font-size: 11px;
-            max-height: 90px;
-        }
-
-        .img-slider .navigationDots{
-            bottom: 10px;
-        }
-        .img-slider .navigationButtons .button{
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-        }
+    .slide .info .title{
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .slide .info .content{
+        font-size: 16px;
+        max-height: 80%;
+        overflow: hidden;
     }
 </style>

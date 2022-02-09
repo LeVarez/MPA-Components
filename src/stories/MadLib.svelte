@@ -75,6 +75,10 @@
     filter: drop-shadow(0px -2px 8px rgba(0, 0, 0, 0.1));
 }
 
+.find-button:hover {
+    filter: drop-shadow(0px -3px 12px rgba(0, 0, 0, 0.15));
+}
+
 .svg-arrow {
     position: relative;
     vertical-align: middle;

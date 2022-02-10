@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
     import TagContainer from "./TagContainer.svelte";
-    import type { tagParameters } from "./interfaces";
+    import type { tagParameters } from "../interfaces";
 
     let tagArray1: tagParameters[] = 
         [{tag: "Blue economy", alt: ""}, 

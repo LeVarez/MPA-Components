@@ -8,4 +8,3 @@ export interface cardParameters {
     title: string,
     previewImage: string
 }
-

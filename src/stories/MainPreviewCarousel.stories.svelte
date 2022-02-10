@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
     import MainPreviewCarousel from "./MainPreviewCarousel.svelte";
-    import MainPreviewCard from "./MainPreviewCard.stories.svelte";
+    //import MainPreviewCard from "./MainPreviewCard.stories.svelte";
 
     let tagArray = [{tag: "Blue economy"}, 
                     {tag: "MPAs"}, 
@@ -34,13 +34,11 @@
 />
 
 <Template let:args>
-    <MainPreviewCarousel
-        previewCards={args.previewCards}
-    />
+    <MainPreviewCarousel/>
 </Template>
 
 
 <Story
-    name="Example 1"
-    args={{previewCards: [pc1, pc1, pc1] }}
+    name="Example YYYYYYYYYYY"
+    args={{}}
 />

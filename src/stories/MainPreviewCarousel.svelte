@@ -1,9 +1,8 @@
 <script lang="ts">
     import {Splide, SplideSlide} from "@splidejs/svelte-splide";
     import { onMount } from "svelte";
-    import type MainPreviewCard from "./MainPreviewCard.svelte";
 
-    export let previewCards: MainPreviewCard[] = [];
+    //export let previewCards: MainPreviewCard[] = [];
 
     let tagArray = [{tag: "Blue economy", alt: ""}, 
                     {tag: "MPAs", alt: ""}, 
@@ -26,10 +25,6 @@
 
 <div class="carousel-container">
 
-    {#each previewCards as card}
-        {card}
-    {/each}
-
     <Splide
         options={ {
                 width : 1000,
@@ -38,10 +33,6 @@
         } }
         bind:this={splide}
     >
-
-        {#each previewCards as card}
-            {card}
-        {/each}
 
     </Splide>
 

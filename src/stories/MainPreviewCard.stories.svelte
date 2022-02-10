@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
     import MainPreviewCard from "./MainPreviewCard.svelte";
-    import type { cardParameters, tagParameters } from "./interfaces";
+    import type { cardParameters, tagParameters } from "../interfaces";
 
     let tagArray1: tagParameters[] = 
         [{tag: "Blue economy", alt: ""}, 
@@ -61,6 +61,6 @@
 />
 
 <Story
-    name="Case study"
+    name="Case study card"
     args={{ param2 }}
 />

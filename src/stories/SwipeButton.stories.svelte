@@ -22,6 +22,6 @@
 
 
 <Story
-    name="Example 1"
+    name="Example XXX"
     args={{ }}
 />

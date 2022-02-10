@@ -1,8 +1,8 @@
 <script lang="ts">
     import TagContainer from "./TagContainer.svelte";
     import { boop } from './Animations.svelte';
-    import type { cardParameters } from "./interfaces";
-    
+    import type { cardParameters, tagParameters } from "../interfaces";
+
     export let parameters: cardParameters;
 
     let isBooped = false;

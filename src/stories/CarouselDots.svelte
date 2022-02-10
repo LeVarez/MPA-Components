@@ -30,7 +30,7 @@
           active={currentPageIndex === pageIndex}
           color={color}
           on:click={handleDotClick(pageIndex)}
-          on:progressAnimationFinished={handleDotClick(currentPageIndex + 1)}
+          on:progressAnimationFinished={handleDotClick(pageIndex >= pagesCount -1 ? 0 : pageIndex + 1)}
         ></Dot>
       </div>
     {/each}

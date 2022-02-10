@@ -1,7 +1,8 @@
 <script lang="ts">
     import Tag from "./Tag.svelte";
+    import type { tagParameters } from "./interfaces";
     
-    export let tags: {tag: string, alt: string}[];
+    export let tags: tagParameters[];
     export let width:number;
 </script>
 

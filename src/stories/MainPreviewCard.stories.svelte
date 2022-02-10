@@ -1,14 +1,25 @@
-<script>
+<script lang="ts">
     import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
     import MainPreviewCard from "./MainPreviewCard.svelte";
+    import type { cardParameters, tagParameters } from "./interfaces";
 
-    let tagArray = [{tag: "Blue economy"}, 
-                    {tag: "MPAs"}, 
-                    {tag: "Blue growth"}, 
-                    {tag: "Ocean conservation"}, 
-                    {tag: "Sustainable development"}, 
-                    {tag: "Nature-based solutions"}, 
-                    {tag: "All biomes"}];
+    let tagArray1: tagParameters[] = 
+        [{tag: "Blue economy", alt: ""}, 
+        {tag: "MPAs", alt: ""}, 
+        {tag: "Blue growth", alt: ""}, 
+        {tag: "Ocean conservation", alt: ""}, 
+        {tag: "Sustainable development", alt: ""}, 
+        {tag: "Nature-based solutions", alt: ""}, 
+        {tag: "All biomes", alt: ""}
+    ];
+    
+    let param1: cardParameters = {
+        cardType: "chapter", 
+        previewImage: "/img/chapter-preview-image.png",
+        category: 'Sustainable financing',
+        title: 'What should MPA managers know about the blue economy and business planning?', 
+        tags: tagArray1
+    }
                     
 </script>
 
@@ -31,6 +42,7 @@
         category = {args.category}
         title = {args.title}
         tags = {args.tags}
+        parameters = {param1}
     />
 </Template>
 

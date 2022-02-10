@@ -1,7 +1,10 @@
 <script lang="ts">
-    
-    import Carousel from 'svelte-carousel';
-    import MainPreviewCard from "./MainPreviewCard.svelte";
+    import {Splide, SplideSlide} from "@splidejs/svelte-splide";
+    import { onMount } from "svelte";
+    import type MainPreviewCard from "./MainPreviewCard.svelte";
+
+    export let previewCards: MainPreviewCard[] = [];
+
     let tagArray = [{tag: "Blue economy", alt: ""}, 
                     {tag: "MPAs", alt: ""}, 
                     {tag: "Blue growth", alt: ""}, 
@@ -10,58 +13,45 @@
                     {tag: "Nature-based solutions", alt: ""}, 
                     {tag: "All biomes", alt: ""}];
 
+    let splide;
+    let controller;
+    let splideElement;
+
+    onMount(() => {
+        controller = splide.splide.Components.Controller;
+        splideElement = document.getElementById('splide');
+    });
+
 </script>
 
 <div class="carousel-container">
 
-    <Carousel
-        particlesToShow={3}
-        particlesToScroll={1}
-        dots={false}
+    {#each previewCards as card}
+        {card}
+    {/each}
+
+    <Splide
+        options={ {
+                width : 1000,
+                height : 1000,
+                gap: 0,
+        } }
+        bind:this={splide}
     >
 
-        <div class="card">
-            <MainPreviewCard
-                cardType= 'chapter'
-                previewImage= "/img/chapter-preview-image.png"
-                category= 'Sustainable financing'
-                title= 'What should MPA managers know about the blue economy and business planning?'
-                tags={tagArray} 
-            />
-        </div>
+        {#each previewCards as card}
+            {card}
+        {/each}
 
+    </Splide>
 
-        <div class="card">
-            <MainPreviewCard
-                cardType= 'chapter'
-                previewImage= "/img/chapter-preview-image.png"
-                category= 'Sustainable financing'
-                title= 'What should MPA managers know about the blue economy and business planning?'
-                tags={tagArray} 
-            />
-        </div>
-
-        <div class="card">
-            <MainPreviewCard
-                cardType= 'chapter'
-                previewImage= "/img/chapter-preview-image.png"
-                category= 'Sustainable financing'
-                title= 'What should MPA managers know about the blue economy and business planning?'
-                tags={tagArray} 
-            />
-        </div>
-
-    </Carousel>
 </div>
 
 <style>
 
     .carousel-container {
         max-width: 2000px;
-    }
-
-    .card {
-        margin-left: 100px;
+        background: red;
     }
 
 </style>

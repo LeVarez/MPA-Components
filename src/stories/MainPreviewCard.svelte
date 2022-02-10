@@ -1,12 +1,14 @@
 <script lang="ts">
     import TagContainer from "./TagContainer.svelte";
     import { boop } from './Animations.svelte';
+    import type { cardParameters } from "./interfaces";
 
-    export let tags: {tag: string, alt: string}[];
-    export let cardType: 'chapter' | 'case study';
-    export let category: string;
-    export let title: string;
-    export let previewImage: string;
+    //export let tags: {tag: string, alt: string}[];
+    //export let cardType: 'chapter' | 'case study';
+    //export let category: string;
+    //export let title: string;
+    //export let previewImage: string;
+    export let parameters: cardParameters;
 
     let isBooped = false;
     let render = true;
@@ -15,34 +17,18 @@
         isBooped = val;
     }
 
-    function handleFocus(){
-        isBooped = true;
-    }
-
     function handleClick() {
-        
+        alert("CARD CLICKED");    
     }
-
-    function loseMouse() {
-        isBooped = false;
-    }
-
-    function loseFocus() {
-        render = false;
-        render = true
-        console.log("HA PERDIDO FOCUS");
-    }
-
-
 
 </script>
 
-<div class={cardType === 'chapter' ? 'container chapter' : 'container case-study'} tabindex="0">
+<div class={parameters.cardType === 'chapter' ? 'container chapter' : 'container case-study'} tabindex="0">
     <div class="preview-image">
-        <img class="image" width="766" height="344" src={previewImage} alt="preview">
+        <img class="image" width="766" height="344" src={parameters.previewImage} alt="preview">
     </div>
     <div class="preview-content">
-        <div class="circle-button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:mouseleave={loseMouse} on:blur={loseFocus}>
+        <div class="circle-button" tabindex="0" on:mouseenter={() => isBooped = true} on:click={handleClick} on:mouseleave={() => isBooped = false}>
             {#if render}
                 <span use:boop={{isBooped, x: 5, timing: 200, setter: setIsBooped}}>
                     <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
@@ -51,10 +37,10 @@
                 </span>   
             {/if}     
         </div>
-        <div class="preview-category-text">{category}</div>
-        <div class="preview-title">{@html title}</div>
+        <div class="preview-category-text">{parameters.category}</div>
+        <div class="preview-title">{@html parameters.title}</div>
         <div class="tags-title">What's this about?</div>
-        <TagContainer {tags} width={600}/>
+        <TagContainer {parameters.tags} width={600}/>
     </div>
 </div>
 

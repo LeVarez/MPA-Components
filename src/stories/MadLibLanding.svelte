@@ -31,7 +31,7 @@
 
     .container {
         background: url("/img/madlib_background_image.png") fixed no-repeat content-box;
-        background-size: contain;
+
         position: relative;
     }
 

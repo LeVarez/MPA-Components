@@ -19,7 +19,7 @@ module.exports = {
   },
   webpackFinal: (config) => {
     config.module.rules.push({
-      test: /@splidejs\/svelte-splide\/.*/,
+      test: /svelte-splide/,
       resolve: { fullySpecified: false },
     });
     config.resolve.alias.svelte = path.resolve('node_modules', 'svelte');

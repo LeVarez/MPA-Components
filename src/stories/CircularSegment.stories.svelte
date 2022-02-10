@@ -30,6 +30,7 @@
             y = {args.y}
             color = {args.color}
             borderColor = {args.borderColor}
+            selected = {args.selected}
         />
     </svg>
   </Template>
@@ -46,6 +47,21 @@
         y : 150,
         color : '#fbe26b',
         borderColor : 'black',
+        selected: false,
+    }}
+  />
+  <Story
+    name="Example Selected"
+    args={{
+        startAngle : 0,
+        endAngle : 60,
+        radius : 50,
+        thickness : 30,
+        x : 150,
+        y : 150,
+        color : '#fbe26b',
+        borderColor : 'black',
+        selected: true,
     }}
   />
 

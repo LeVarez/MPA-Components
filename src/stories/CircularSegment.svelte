@@ -1,5 +1,6 @@
 <script lang="ts">
 
+    //Desing properties
     export let startAngle : number;
     export let endAngle : number;
     export let radius : number;
@@ -9,7 +10,17 @@
     export let color = '#fbe26b'
     export let borderColor = 'black'
     export let gap = 0;
-    export let clickFn : () =>{};
+    export let thicknessGain = 20;
+
+    export let selected = false;
+
+    export let onClickFn = () => {}
+
+    let currentThicknessGain = thicknessGain;
+    let currentThickness = thickness;
+
+    let selectedAnimation : SVGAnimationElement;
+    let unselectedAnimation : SVGAnimationElement;
 
     let describeArc = (x:number, y:number, radius:number, thickness:number, startAngle:number, endAngle:number) => {
 
@@ -40,13 +51,21 @@
         };
     }
 
-    let de = describeArc(x,y,radius,thickness + 100,startAngle - gap ,endAngle + gap);
+    $:
+    if(selected && selectedAnimation)selectedAnimation.beginElement();
+    else if(unselectedAnimation) unselectedAnimation.beginElement();
+
 </script>
 
 
-<path class="segment" fill={color} stroke={borderColor} d={describeArc(x,y,radius,thickness,startAngle + gap/2 ,endAngle - gap/2)} on:click={clickFn}>
-    <animate begin="mouseover" attributeName="d" to={describeArc(x,y,radius,thickness + 20,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
-    <animate begin="mouseout" attributeName="d" to={describeArc(x,y,radius,thickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+<path class="segment" fill={color} stroke={borderColor} d={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} on:click={onClickFn}>
+    <animate begin="mouseover" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+    {#if !selected}
+    <animate begin="mouseout" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
+    {/if}
+    <animate bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" />
+    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" id='test'/>
+
 </path>
 
 <style>

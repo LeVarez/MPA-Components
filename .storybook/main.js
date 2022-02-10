@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -11,5 +13,16 @@ module.exports = {
   "framework": "@storybook/svelte",
   "svelteOptions": {
     "preprocess": require("svelte-preprocess")()
-  }
+  },
+  core: {
+    builder: "webpack5",
+  },
+  webpackFinal: (config) => {
+    config.module.rules.push({
+      test: /svelte-splide/,
+      resolve: { fullySpecified: false },
+    });
+    config.resolve.alias.svelte = path.resolve('node_modules', 'svelte');
+    return config;
+  },
 }

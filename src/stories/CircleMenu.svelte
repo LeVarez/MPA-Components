@@ -15,17 +15,17 @@
     export let gap = 3;
     export let color = "#fbe26b";
     export let borderColor = "#fbe26b";
-
-
+    export let currentPageIndex = 0;
 
     let calcSegments = () => {
         let menuSegments = [];
         let currentAngle = 0;
-        console.log(data)
+
         data.forEach(element => {
             let segment = {
                 startAngle: currentAngle,
                 endAngle: currentAngle + (360 * element.percentatge) / 100,
+                selected: false,
             }
             currentAngle = segment.endAngle;
             menuSegments.push(segment);
@@ -34,12 +34,12 @@
     }
 
     let menuSegments = calcSegments();
-
 </script>
 
 <svg width="400" height="400">
-    {#each menuSegments as segment}
+    {#each menuSegments as segment, i}
     <CircularSegment
+        bind:this={segment.ref}
         startAngle = {segment.startAngle}
         endAngle = {segment.endAngle}
         radius = {radius}
@@ -49,6 +49,8 @@
         y = {y}
         color = {color}
         borderColor = {borderColor}
+        selected = {currentPageIndex === i}
+        onClickFn = {() => {currentPageIndex = i}}
     />
     {/each}
 </svg>

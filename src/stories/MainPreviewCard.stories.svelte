@@ -12,6 +12,12 @@
         {tag: "Nature-based solutions", alt: ""}, 
         {tag: "All biomes", alt: ""}
     ];
+
+    let tagArray2: tagParameters[] = 
+        [{tag: "Blue economy", alt: ""}, 
+        {tag: "MPAs", alt: ""}, 
+        {tag: "Blue growth", alt: ""}
+    ];
     
     let param1: cardParameters = {
         cardType: "chapter", 
@@ -19,6 +25,14 @@
         category: 'Sustainable financing',
         title: 'What should MPA managers know about the blue economy and business planning?', 
         tags: tagArray1
+    }
+
+    let param2: cardParameters = {
+        cardType: "case study", 
+        previewImage: "/img/case-study-preview-image.png",
+        category: 'Sustainable financing',
+        title: '<b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification', 
+        tags: tagArray2
     }
                     
 </script>
@@ -37,29 +51,16 @@
 
 <Template let:args>
     <MainPreviewCard
-        cardType = {args.cardType}
-        previewImage = {args.previewImage}
-        category = {args.category}
-        title = {args.title}
-        tags = {args.tags}
-        parameters = {param1}
+        parameters = {args.parameters}
     />
 </Template>
 
 <Story
     name="Chapter card"
-    args={{cardType: 'chapter', 
-            previewImage: "/img/chapter-preview-image.png",
-            category: 'Sustainable financing',
-            title: 'What should MPA managers know about the blue economy and business planning?', 
-            tags: tagArray }}
+    args={{parameters: param1 }}
 />
 
 <Story
     name="Case study"
-    args={{cardType: 'case study',
-            previewImage: "/img/case-study-preview-image.png",
-            category: 'Sustainable financing',
-            title: '<b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification',
-            tags: tagArray }}
+    args={{ param2 }}
 />

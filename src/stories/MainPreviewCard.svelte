@@ -2,12 +2,7 @@
     import TagContainer from "./TagContainer.svelte";
     import { boop } from './Animations.svelte';
     import type { cardParameters } from "./interfaces";
-
-    //export let tags: {tag: string, alt: string}[];
-    //export let cardType: 'chapter' | 'case study';
-    //export let category: string;
-    //export let title: string;
-    //export let previewImage: string;
+    
     export let parameters: cardParameters;
 
     let isBooped = false;
@@ -40,7 +35,7 @@
         <div class="preview-category-text">{parameters.category}</div>
         <div class="preview-title">{@html parameters.title}</div>
         <div class="tags-title">What's this about?</div>
-        <TagContainer {parameters.tags} width={600}/>
+        <TagContainer tags={parameters.tags} width={600}/>
     </div>
 </div>
 

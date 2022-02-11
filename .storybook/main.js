@@ -10,6 +10,7 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-svelte-csf"
   ],
+  "staticDirs": ['../public'],
   "framework": "@storybook/svelte",
   "svelteOptions": {
     "preprocess": require("svelte-preprocess")()

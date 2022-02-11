@@ -9,6 +9,8 @@
     export let textColor = '#202020';
     export let slides:Slide[] = [];
     export let currentPageIndex = 0;
+    export let width = 800;
+    export let height = 300;
 
     interface Slide{
 		title: string;
@@ -36,14 +38,16 @@
     let handleMove = (event) => {
         currentPageIndex = event.detail.index;
     }
+
+    $: if(currentPageIndex >= 0 && splide) splide.go(currentPageIndex);
 </script>
 
 <div class="container" style="background-color: {backgroundColor};">
     <Splide
     options={ {
         rewind: true,
-        width : 800,
-        height : 300,
+        width : width,
+        height : height,
         gap: -3,
     } }
     bind:this={splide}
@@ -93,6 +97,7 @@
 
     .container{
         border-radius: 15px;
+        width: fit-content;
     }
     .navigationButtons{
         width: 100px;
@@ -129,8 +134,7 @@
     .slide .info .title{
         font-size: 16px;
         font-weight: 700;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        height: 25%;
     }
     .slide .info .content{
         font-size: 16px;

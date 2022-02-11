@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
 
     //Desing properties
     export let startAngle : number;
@@ -13,7 +14,6 @@
     export let thicknessGain = 20;
 
     export let selected = false;
-
     export let onClickFn = () => {}
 
     let currentThicknessGain = thicknessGain;
@@ -21,6 +21,13 @@
 
     let selectedAnimation : SVGAnimationElement;
     let unselectedAnimation : SVGAnimationElement;
+
+    let animated = false;
+
+
+    onMount(() => {
+
+    })
 
     let describeArc = (x:number, y:number, radius:number, thickness:number, startAngle:number, endAngle:number) => {
 
@@ -51,25 +58,50 @@
         };
     }
 
-    $:
-    if(selected && selectedAnimation)selectedAnimation.beginElement();
-    else if(unselectedAnimation) unselectedAnimation.beginElement();
+    let handleMouseEnter = () => {
 
+        if(!animated) {
+            animated = true;
+            selectedAnimation.beginElement();
+        }
+    }
+    let handelMouseLeave = () => {
+
+        animated = false;
+        unselectedAnimation.beginElement();
+
+
+    }
+
+    let selectedState : string = describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2);
+    let unselectedState : string = describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2);
+
+    $:
+    if(selected && selectedAnimation) handleMouseEnter();
+    else if(unselectedAnimation) handelMouseLeave();
 </script>
 
 
-<path class="segment" fill={color} stroke={borderColor} d={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} on:click={onClickFn}>
-    <animate begin="mouseover" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
-    {#if !selected}
-    <animate begin="mouseout" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze"/>
-    {/if}
-    <animate bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" />
-    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2)} dur="0.3s" fill="freeze" id='test'/>
+<path class="segment shadow"
+on:mouseenter={handleMouseEnter}
+on:mouseleave={handelMouseLeave}
+fill={color}
+stroke={borderColor}
+d={unselectedState}
+on:click={onClickFn}>
+
+    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={selectedState} dur="0.3s" fill="freeze"/>
+    <animate  bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={selected? '':unselectedState} dur="0.3s" fill="freeze"/>
 
 </path>
 
 <style>
     .segment{
         cursor: pointer;
+    }
+    .shadow {
+
+        filter: drop-shadow( 5px 5px 15px 5px #000000);
+        /* Similar syntax to box-shadow */
     }
 </style>

@@ -14,6 +14,7 @@
     export let y = 150;
     export let gap = 3;
     export let color = "#fbe26b";
+    export let unselectedColor = "#fbe26b";
     export let borderColor = "#fbe26b";
     export let currentPageIndex = 0;
 
@@ -47,8 +48,8 @@
         gap = {gap}
         x = {x}
         y = {y}
-        color = {color}
-        borderColor = {borderColor}
+        color = {currentPageIndex === i? color : unselectedColor}
+        borderColor = {currentPageIndex === i? borderColor : unselectedColor}
         selected = {currentPageIndex === i}
         onClickFn = {() => {currentPageIndex = i}}
     />

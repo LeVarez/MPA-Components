@@ -95,6 +95,7 @@
     }
 
     .container {
+        display: inline-block;
         width: 766px;
         height: 671px;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
@@ -116,7 +117,6 @@
         max-height: 500px;
         width: auto;
         height: auto;
-        
     }
     
 </style>

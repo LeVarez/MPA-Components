@@ -40,14 +40,14 @@
 
 <div class="container" style="background-color: {backgroundColor};">
     <Splide
-    options={ {
-        rewind: true,
-        width : 800,
-        height : 300,
-        gap: -3,
-    } }
-    bind:this={splide}
-    on:move={handleMove}
+        options={ {
+            rewind: true,
+            width : 800,
+            height : 300,
+            gap: -3,
+        } }
+        bind:this={splide}
+        on:move={handleMove}
     >
         <div class="navigationButtons" slot="before-track">
             <div on:click={handlePrevButton} class="button prev" style="background-color: {buttonColor};">

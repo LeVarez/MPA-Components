@@ -1,38 +1,32 @@
 <script lang='ts'>
-    import TextSection from "./stories/TextSection.svelte";
-    import TextSlider from "./stories/TextSlider2.svelte";
-    import CircleMenu from "./stories/CircleMenu.svelte"
-    import content from './stories/data/TextSlider.json';
-import { text } from "svelte/internal";
+    import MainPreviewCarousel from './stories/MainPreviewCarousel.svelte';
+    import type { cardParameters, tagParameters } from "./interfaces";
 
-    let currentPageIndex = 0;
-    let backgroundColor = "#fbe26b";
-    let buttonColor = "#fbe26b";
-    let textColor = "#202020";
+    
+    let tagArray1: tagParameters[] = 
+        [{tag: "Blue economy", alt: ""}, 
+        {tag: "MPAs", alt: ""}, 
+        {tag: "Blue growth", alt: ""}, 
+        {tag: "Ocean conservation", alt: ""}, 
+        {tag: "Sustainable development", alt: ""}, 
+        {tag: "Nature-based solutions", alt: ""}, 
+        {tag: "All biomes", alt: ""}
+    ];
+
+
+    let param1: cardParameters = {
+        cardType: "chapter", 
+        previewImage: "/img/chapter-preview-image.png",
+        category: 'Sustainable financing',
+        title: 'What should MPA managers know about the blue economy and business planning?', 
+        tags: tagArray1
+    }
+
+    let params = [param1, param1, param1, param1, param1, param1];
+
 </script>
 
 
 <div>
-<TextSlider
-    bind:currentPageIndex={currentPageIndex}
-    slides={content}
-    backgroundColor={backgroundColor}
-    buttonColor={buttonColor}
-    textColor={textColor}
-/>
-<CircleMenu
-        data={content}
-        radius={100}
-        thickness={20}
-        x={150}
-        y={150}
-        gap={5}
-        color={backgroundColor}
-        borderColor={backgroundColor}
-        bind:currentPageIndex={currentPageIndex}
-/>
+    <MainPreviewCarousel parameters={params} />
 </div>
-
-<style type="text/postcss">
-
-</style>

@@ -1,16 +1,11 @@
 <script lang="ts">
     import {Splide, SplideSlide} from "@splidejs/svelte-splide";
+    import type { Options } from '@splidejs/splide';
     import { onMount } from "svelte";
+    import type { cardParameters } from "../interfaces";
+    import MainPreviewCard from "./MainPreviewCard.svelte";
 
-    //export let previewCards: MainPreviewCard[] = [];
-
-    let tagArray = [{tag: "Blue economy", alt: ""}, 
-                    {tag: "MPAs", alt: ""}, 
-                    {tag: "Blue growth", alt: ""}, 
-                    {tag: "Ocean conservation", alt: ""}, 
-                    {tag: "Sustainable development", alt: ""}, 
-                    {tag: "Nature-based solutions", alt: ""}, 
-                    {tag: "All biomes", alt: ""}];
+    export let parameters: cardParameters[];
 
     let splide;
     let controller;
@@ -21,28 +16,38 @@
         splideElement = document.getElementById('splide');
     });
 
+    const options: Options = {
+        type: 'loop',
+        rewind : true,
+        perPage: 3,
+        perMove: 1,
+        width: '150em',
+        height: '1000px',
+        focus: 'center',
+        wheel: true
+    }
+
 </script>
 
 <div class="carousel-container">
 
     <Splide
-        options={ {
-                width : 1000,
-                height : 1000,
-                gap: 0,
-        } }
+        options={ options }
         bind:this={splide}
+        on:mounted={ e => console.log( e.detail.splide.length ) }
+        on:move={ e => console.log( 'move to', e.detail.index ) }
     >
-
+        {#each parameters as p}
+            <SplideSlide>
+                <MainPreviewCard parameters={p} />
+            </SplideSlide>
+        {/each}
     </Splide>
 
 </div>
 
 <style>
 
-    .carousel-container {
-        max-width: 2000px;
-        background: red;
-    }
+    
 
 </style>

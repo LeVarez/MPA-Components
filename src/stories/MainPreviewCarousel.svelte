@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import type { cardParameters } from "../interfaces";
     import MainPreviewCard from "./MainPreviewCard.svelte";
+    import '@splidejs/splide/dist/css/splide.min.css';
 
     export let parameters: cardParameters[];
 
@@ -22,9 +23,10 @@
         perPage: 3,
         perMove: 1,
         width: '150em',
-        height: '1000px',
+        gap: '8em',
         focus: 'center',
-        wheel: true
+        wheel: true,
+        pagination: false
     }
 
 </script>
@@ -46,8 +48,17 @@
 
 </div>
 
-<style>
+<style type="text/postcss">
 
-    
+    @import "https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css";
+    :global(.splide__arrow){
+        display: none;
+    }
+    :global(.splide__pagination){
+        display: none;
+    }
+    :global(.splide__track){
+        border-radius: 15px;
+    }
 
 </style>

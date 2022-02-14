@@ -18,6 +18,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
+  "staticDirs": ["./public"],
   webpackFinal: (config) => {
     config.module.rules.push({
       test: /svelte-splide/,

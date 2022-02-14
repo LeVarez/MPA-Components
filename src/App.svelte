@@ -1,7 +1,12 @@
 <script lang='ts'>
     import MainPreviewCarousel from './stories/MainPreviewCarousel.svelte';
     import type { cardParameters, tagParameters } from "./interfaces";
-
+    import TinyPreviewCard from './stories/TinyPreviewCard.svelte';
+    
+    let tagArray = [{tag: "Blue economy", alt: "grey"}, 
+                    {tag: "MPAs", alt: "grey"}, 
+                    {tag: "Blue growth", alt: "grey"}, 
+                    {tag: "Ocean conservation", alt: "grey"}];
     
     let tagArray1: tagParameters[] = 
         [{tag: "Blue economy", alt: ""}, 
@@ -29,4 +34,10 @@
 
 <div>
     <MainPreviewCarousel parameters={params} />
+    <TinyPreviewCard
+            previewImage = "/img/chapter-preview-image.png"
+            title= 'How can I improve communications to support sustainable financing?'
+            tags = {tagArray}>
+    </TinyPreviewCard>
+
 </div>

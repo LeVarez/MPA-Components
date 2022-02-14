@@ -48,17 +48,6 @@
 
 </div>
 
-<style type="text/postcss">
-
-    @import "https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css";
-    :global(.splide__arrow){
-        display: none;
-    }
-    :global(.splide__pagination){
-        display: none;
-    }
-    :global(.splide__track){
-        border-radius: 15px;
-    }
+<style>
 
 </style>

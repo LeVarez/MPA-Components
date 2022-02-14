@@ -16,6 +16,7 @@
 		title: string;
 		content: string;
     }
+
     let splide;
     let controller;
     let splideElement;
@@ -140,6 +141,7 @@
         font-size: 16px;
         max-height: 75%;
         overflow: hidden;
+
     }
     .custom-dots{
         position: absolute;

@@ -20,13 +20,13 @@
 
   <!-- More on component templates: https://storybook.js.org/docs/svelte/writing-stories/introduction#using-args -->
   <Template let:args>
-    <div style="width: 800px; height: 400px;">
-      <LifeCycle
-        title={args.title}
-        content={args.content}
-        componentsColor={args.componentsColor}
-      />
-  </div>
+    <div style="width: 100%; height: 500px">
+    <LifeCycle
+      title={args.title}
+      content={args.content}
+      componentsColor={args.componentsColor}
+    />
+    </div>
   </Template>
 
   <!-- More on args: https://storybook.js.org/docs/svelte/writing-stories/args -->
@@ -39,6 +39,7 @@
                 backgroundColor: "#fbe26b",
                 buttonColor: "#fbe26b",
                 textColor: "#202020",
+                unselectedColor: "#FFFFFF80"
         },
     }}
   />

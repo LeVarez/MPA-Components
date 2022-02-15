@@ -1,9 +1,10 @@
 <script lang="ts">
     import TagContainer from "./TagContainer.svelte";
     import { boop } from './Animations.svelte';
-    import type { cardParameters, tagParameters } from "../interfaces";
+    import type { cardParameters } from "../interfaces";
 
     export let parameters: cardParameters;
+    export let active: boolean;
 
     let isBooped = false;
     let render = true;
@@ -18,7 +19,7 @@
 
 </script>
 
-<div class={parameters.cardType === 'chapter' ? 'container chapter' : 'container case-study'} tabindex="0">
+<div class={parameters.cardType === 'chapter' ? 'container chapter' : 'container case-study'} style={active ? "opacity: 100%" : "opacity: 50%"} tabindex="0">
     <div class="preview-image">
         <img class="image" width="766" height="344" src={parameters.previewImage} alt="preview">
     </div>

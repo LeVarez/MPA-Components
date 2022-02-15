@@ -59,7 +59,6 @@
     }
 
     let handleMouseEnter = () => {
-
         if(!animated) {
             animated = true;
             selectedAnimation.beginElement();
@@ -67,8 +66,10 @@
     }
     let handelMouseLeave = () => {
 
-        animated = false;
-        unselectedAnimation.beginElement();
+        if(animated && !selected) { 
+            animated = false;
+            unselectedAnimation.beginElement();
+        } 
 
 
     }

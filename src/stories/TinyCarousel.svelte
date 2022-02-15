@@ -13,10 +13,12 @@
     export let width : number =  1100;
     export let title : string = "<b>You may also like</b>"
 
+
     let currentSlideIndex : number = 0;
     let prevArrow : HTMLElement;
     let nextArrow : HTMLElement;
-    let perPage : number = 4
+    let perPage : number = 3;
+    let gap : number = 0;
 
     const options: Options = {
         type: 'slide',
@@ -24,18 +26,20 @@
         perPage: perPage,
         perMove: 1,
         width: width,
-        fixedWidth: 285,
-        gap: 30,
+        gap: 0,
         classes: {
 		arrow : 'splide__arrow custom_arrow',
 		prev  : 'splide__arrow--prev',
 		next  : 'splide__arrow--next',
         },
+        padding: { right: '13%' }
+
     }
 
 
     let handleMove = (event) => {
         currentSlideIndex = event.detail.index;
+        console.log(currentSlideIndex)
     }
 
     let addClass = (element : HTMLElement, cssClass : string) => {
@@ -74,22 +78,24 @@
 
 <div class='container'>
     <div class="content">
-        <p>{@html title}</p>
+        <p class="title">{@html title}</p>
         <Splide
             options={ options }
             bind:this={splide}
             on:move={handleMove}
         >
-            {#each slides as slide}
+            {#each slides as slide, i}
                 <SplideSlide>
                     <TinyPreviewCard
                         previewImage = {slide.previewImage}
                         title = {slide.title}
                         tags = {slide.tags}
+                        opacity = { i >= (currentSlideIndex + perPage) ? 0.5 : 1 }
                     />
                 </SplideSlide>
             {/each}
         </Splide>
+        <div class="opacity-div"/>
     </div>
 </div>
 
@@ -98,8 +104,8 @@
 
     .container  {
         position: absolute;
-        width: 1154px;
-        height: 407px;
+
+
 
         background: #F9F9F9;
         box-shadow: inset 0px 2px 12px rgba(0, 0, 0, 0.05);
@@ -108,10 +114,20 @@
     .content{
         position: relative;
         height: auto;
-        margin-left: 25px;
-
-        margin-top: 22px;
+        padding: 22px 25px 30px 25px;
     }
 
+    .title{
+        font-family: 'Montserrat';
+    }
+
+    .opacity-div{
+        height: 100%;
+        width: 15%;
+        background: linear-gradient(to right, #F9F9F900, #F9F9F9);
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 
 </style>

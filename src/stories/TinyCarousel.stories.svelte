@@ -50,7 +50,7 @@
             title: '6-How can I improve communications to support sustainable financing?',
             tags: tagArray},
             {previewImage: "/img/fishermans.png",
-            title: '71-How can I improve communications to support sustainable financing?',
+            title: '7-How can I improve communications to support sustainable financing?',
             tags: tagArray},
             {previewImage: "/img/fishermans.png",
             title: '8-How can I improve communications to support sustainable financing?',

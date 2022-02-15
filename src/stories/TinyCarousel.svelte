@@ -26,11 +26,9 @@
         perPage: perPage,
         perMove: 1,
         width: width,
-        gap: 0,
+        gap: gap,
         classes: {
-		arrow : 'splide__arrow custom_arrow',
-		prev  : 'splide__arrow--prev',
-		next  : 'splide__arrow--next',
+            pagination : 'vanish',
         },
         padding: { right: '13%' }
 

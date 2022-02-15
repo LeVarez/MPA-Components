@@ -90,7 +90,6 @@
                         previewImage = {slide.previewImage}
                         title = {slide.title}
                         tags = {slide.tags}
-                        opacity = { i >= (currentSlideIndex + perPage) ? 0.5 : 1 }
                     />
                 </SplideSlide>
             {/each}

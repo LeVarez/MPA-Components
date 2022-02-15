@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {Splide, SplideSlide} from "@splidejs/svelte-splide";
-    import type { Options } from '@splidejs/splide';
-    import { onMount } from "svelte";
-    import type { cardParameters } from "../interfaces";
-    import MainPreviewCard from "./MainPreviewCard.svelte";
     import '@splidejs/splide/dist/css/splide.min.css';
+    import { onMount } from "svelte";
+    import {Splide, SplideSlide} from "@splidejs/svelte-splide";
+    import MainPreviewCard from "./MainPreviewCard.svelte";
     import SwipeButton from "./SwipeButton.svelte";
+    import type { Options } from '@splidejs/splide';
+    import type { cardParameters } from "../interfaces";
 
     export let parameters: cardParameters[];
 
@@ -22,34 +22,25 @@
 
     const options: Options = {
         type: 'loop',
-        rewind : true,
         perPage: 3,
         perMove: 1,
-        width: '150em',
-        gap: '8em',
+        gap: '8rem',
+        width: '150rem',
         focus: 'center',
         wheel: true,
         pagination: false,
-        arrows: false
+        arrows: true
     }
 
-    const event = () => {};
+    const event = () => {console.log(width, height)};
+
+    let width, height;
 
 </script>
 
-<div class="carousel-container">
-
-    <div class="splide__arrows">
-        <div class="splide__arrow splide__arrow--prev">
-            <SwipeButton clickEvent={event}></SwipeButton>
-        </div>
-        <div class="splide__arrow splide__arrow--next">
-            <SwipeButton clickEvent={event}></SwipeButton>
-        </div>
-    </div>
-    
+<div class="carousel-container" bind:clientHeight={height} bind:clientWidth={width}>
     <Splide
-        options={ options }
+        {options}
         bind:this={splide}
         on:mounted={ e => currentCard = e.detail.splide.index }
         on:move={ e => currentCard = e.detail.index }
@@ -62,6 +53,12 @@
     </Splide>
 </div>
 
+<button on:click={event}></button>
+
 <style>
+
+    .carousel-container {
+        width: 100%;
+    }
 
 </style>

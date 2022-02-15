@@ -87,10 +87,10 @@
 <style type="text/postcss">
     @import "https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css";
     :global(.splide__arrow){
-        display: none;
+        display: none !important;
     }
     :global(.splide__pagination){
-        display: none;
+        display: none !important;
     }
     :global(.splide__track){
         border-radius: 15px;

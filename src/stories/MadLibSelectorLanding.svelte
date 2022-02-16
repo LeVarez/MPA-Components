@@ -6,8 +6,6 @@
 
     let currentIndex = 0;
     let listboxVisible = false;
-
-    const arrowUnicode = `&#x2193`;
     
     const openListbox = () => { listboxVisible = true; }
 
@@ -34,7 +32,12 @@
 
 <div class="area" >
     <button class="selector-area" on:click={listboxVisible ? closeListbox : openListbox} on:blur={closeListbox}>
-        {selected} {@html arrowUnicode}
+        <div class="arrow"> 
+            <svg class="svg" width="16" height="10" viewBox="0 0 16 10" fill="none">
+                <path d="M1 0.930542L8.13878 8.06935L15.2776 0.930527" stroke="white" stroke-width="2"/>
+            </svg> 
+        </div>
+        {selected}  
     </button>      
 
     {#if listboxVisible}
@@ -93,14 +96,15 @@
         vertical-align: middle;
         border-radius: 20px;
         margin-bottom: 0.4rem;
-        background:none;
         color: #FFFFFF;
+        background-color:rgba(249, 249, 249, 0.25);
         border: none;
         padding: 0.25rem 0.7rem 0.25rem 0.7rem;
         cursor: pointer;
         font-family: 'Montserrat';
         font-size: 32px;
         font-weight: 600;
+        filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.2));
     }
 
     .selector-area:focus {
@@ -118,6 +122,16 @@
         color: black;
         border: none;
         z-index: 1000;
+    }
+
+    .arrow {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .svg {
+        vertical-align: middle;
+        transform: translateY(0.0rem);
     }
 
 </style>

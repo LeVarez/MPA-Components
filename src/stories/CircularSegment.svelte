@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import * as anime from 'animejs';
 
     //Desing properties
     export let startAngle : number;
@@ -59,27 +60,34 @@
     }
 
     let handleMouseEnter = () => {
-        if(!animated) {
-            animated = true;
+        animated = true;
+        if(animated && !selected) {
             selectedAnimation.beginElement();
         }
     }
     let handelMouseLeave = () => {
-
-        if(animated && !selected) { 
+        animated = true;
+        if(animated && !selected) {
             animated = false;
             unselectedAnimation.beginElement();
-        } 
+        }
 
 
     }
 
-    let selectedState : string = describeArc(x,y,radius,currentThickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2);
-    let unselectedState : string = describeArc(x,y,radius,currentThickness,startAngle + gap/2 ,endAngle - gap/2);
+    let selectedState : string = describeArc(x,y,radius, thickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2);
+    let unselectedState : string = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
+    let initialState = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
 
     $:
     if(selected && selectedAnimation) handleMouseEnter();
-    else if(unselectedAnimation) handelMouseLeave();
+    else if(unselectedAnimation && thickness) handelMouseLeave();
+
+    $:if(thickness && unselectedAnimation && !selected){
+        unselectedState = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
+
+        unselectedAnimation.beginElement()
+    }
 </script>
 
 
@@ -88,11 +96,11 @@ on:mouseenter={handleMouseEnter}
 on:mouseleave={handelMouseLeave}
 fill={color}
 stroke={borderColor}
-d={unselectedState}
+d={initialState}
 on:click={onClickFn}>
 
-    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={selectedState} dur="0.3s" fill="freeze"/>
-    <animate  bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={selected? '':unselectedState} dur="0.3s" fill="freeze"/>
+    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={selectedState} dur="1s" fill="freeze"/>
+    <animate  bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={unselectedState} dur="1s" fill="freeze"/>
 
 </path>
 

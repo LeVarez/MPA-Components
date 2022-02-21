@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
+<defs>
+<filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+  <feColorMatrix type="matrix" in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+</filter>
+<mask id="mask0">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="40" height="40" style="fill:rgb(0%,0%,0%);fill-opacity:0.501961;stroke:none;"/>
+  </g>
+</mask>
+<image id="image14" width="40" height="40" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAEeElEQVRYhdWYPWwjRRTH/2+/nCibECUcSNeyKBxCqSjuGuAooEHHAaFKkeKKnKKkcHeiiKVQcEggF4kit5EQASni0Akh0SDRBCqKFHyIHoQuxCZxkv3yPgp7jvHsrHecmIInWbuefTPvN/+Z3XkzhMsZFdwDABfcXzjAsPXkunaBX0e6Z1wAdFhAGczWlKkmQ3U0ZSMFFCC2AlXWBktXRhfUGNIEUAaR4QbNPxVOBpQhVZ+hAXWqqWA28mrKwWWYItBCSOuCcATAAeDWarWzOI6fj6LoVhiGd8IwvBNF0a04jq/VarUzAG7Pl5R2ddNFCzEsnAOAmPlKFEX3ANwmoiu6Rpj5EYAHlUrlPhEdoqtUKh7DQMlBgKLXfT1m5iRJkvvMvALAK+q5YjERbbmu+x4RuQqQ+KWmgAJGBgQAx/f9yuHh4RdE9JIhmGrfJ0nytu/7beSVTKFRUQWUh9aS4ZiZ4jjeB/DCBeGE/eJ53nUi6iiQGTRDrXtJ1InrBEGQxHH82QjgAOC5OI4/CYIgQXeUgH5h+kz9ZKjqEQAniqI3AHw6ArjHZtv2u47jfIP+oc2pqCqoqmczcwjg/bKAzWYTR0dHxoCdTueDhYWFM+SXzD4VLeUhlKsVRdFNAM+UBWw0GlheXkar1TJlDHZ3d19G/1xXv5U5BdVkgAC8aRKtWq1ienoad+/exfHxsREhM99Gv2q5j7YMqE5QAgAium4SbGxsDPV6Ha7rYm1tDaenpyaAN+RYOhadgur1qgkgAPi+j+3tbaRpitXVVZyfn5dVuVoQ87FZukKlbMYUEAAmJyexsbGBg4MD7OzslLk/WRZ/ULIg7K8h+HBycoL19XXMz89jaWmpzP1RmYMJ4O9GZADa7TZWVlbgOA62trYwPj5eVuWPMgcBqMvHGACI6AcTuDAMUa1WkSQJNjc3MTExUVqHiPbL4qsKqlkuE9GXJoD1eh2tVguNRgNTU1MmVdBrOxezz0e6igxGQDvoriRncRz/BCAYFKzZbIKZMTNj/E79tri4eG1vb89Hd3kTiUMGaflTAdV12EV3NXkNwOemkU3Mtu13HMf5tgeUoGA9luegTuoMAM/NzT0E8NUI+R4GQfC1HEMTu/sOSJUKsxl0h7ozonzwZ8/zbhAR4d+hNcpmilRkABkR2bOzs68w83eXgNtPkuTVHpxQrlA9FVCYmtWmvcaydrvdqVQqrxPRxwDiIcAiAB95nnfT9/1QtId82t9RKw7ak+TS/t5/CwCYeTqKonuWZb3FzE/pqIjozyzLHlQqlQ+JSORhOjhtul8EKEPmNk7on5/IsuzvNE1fZOZnmflpAeZ53q/M/KNlWU9IIALGaMM0CBA9kMJ9ce9nslQC/fOtaF+c6SoWHZsJEz2Wsx4RjJDvse7oQ/jLEKXKqQ2WPdfNSblc15Z87KaezWQwPEAqA5T9Bh0iqe0VLf5DH8GVDbEuSKaBK+rooLPBkZ0P6vzljZUJYEf5/5+csOrqFW121A/u0GBqoMtYWRtDQ/2v7B8mv9tYMB+/cAAAAABJRU5ErkJggg=="/>
+</defs>
+<g id="surface1">
+<use xlink:href="#image14" mask="url(#mask0)"/>
+</g>
+</svg>

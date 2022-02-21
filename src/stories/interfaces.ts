@@ -1,4 +1,3 @@
-
 export interface tagParameters {tag: string, alt: string};
 
 export interface cardParameters {

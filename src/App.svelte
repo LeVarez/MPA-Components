@@ -1,7 +1,7 @@
 <script lang='ts'>
-    import MainPreviewCarousel from './stories/MainPreviewCarousel.svelte';
-    import type { cardParameters, tagParameters } from "./interfaces";
-    
+    import MainPreviewCarousel from '../src/stories/MainPreviewCarousel.svelte';
+    import type { cardParameters, tagParameters } from "./stories/interfaces";
+
     let tagArray1: tagParameters[] = 
         [{tag: "Blue economy", alt: ""}, 
         {tag: "MPAs", alt: ""}, 
@@ -12,7 +12,6 @@
         {tag: "All biomes", alt: ""}
     ];
 
-
     let param1: cardParameters = {
         cardType: "chapter", 
         previewImage: "/img/chapter-preview-image.png",
@@ -21,11 +20,14 @@
         tags: tagArray1
     }
 
-    let params = [param1, param1, param1, param1, param1, param1];
+    let params = [param1, param1, param1];
 
 </script>
 
 
 <div>
-    <MainPreviewCarousel parameters={params} />
+
+    <MainPreviewCarousel
+        parameters={params}
+    ></MainPreviewCarousel>
 </div>

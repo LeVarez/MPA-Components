@@ -7,25 +7,21 @@
 <Meta
     title="GlobeViz"
     component={GlobeViz}
-    argTypes={{
-        backgroundColor: { control: "color" },
-        color: { control: "color"},
-        size: {
-        control: { type: 'select' },
-        options: ['small', 'medium', 'large'],
-        },
-    }}
+    argTypes={{}}
 />
 
 <Template let:args>
     <GlobeViz
-        scale={args.scale}
-        coordinates={args.coordinates}
+        width={args.width}
+        highlight={args.highlight}
+        yaw={args.yaw}
+        pitch={args.pitch}
+        roll={args.roll}
     />
 </Template>
 
 
 <Story
     name="GlobeViz 111"
-    args={{ scale: 100, coordinates: {lat: 54.2, lon: -22.3} }}
+    args={{ width: 500, highlight: {lat: -74.0059, lon: 40.7128}, yaw: 0, pitch: 0, roll: 0 }}
 />

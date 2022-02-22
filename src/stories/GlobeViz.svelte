@@ -4,68 +4,84 @@
     import { feature } from "topojson";
     import worlddata from "./110m.json";
 
-    export let scale: number;
-    export let coordinates: {lat: number, lon: number};
+    export let yaw: number;
+    export let pitch: number;
+    export let roll: number;
+    export let highlight: {lat: number, lon: number};
+    export let width: number = 500;
 
-    let geoGenerator = ({
-      type: 'Feature',
-      geometry: {
-        type: 'LineString',
-        coordinates: [[0.1278, 51.5074], [-74.0059, 40.7128]]
-      }
-    });
-
-    let data;
+    let landPath;
     const projection = d3.geoOrthographic();
-    projection.rotate([coordinates.lat, coordinates.lon]);
-    projection.scale(scale);
+    projection.rotate([yaw, pitch, roll]);
+    projection.scale(width/2);
+    projection.translate([width/2, width/2]);
     const path = d3.geoPath().projection(projection);
 
     let circleGenerator = d3.geoCircle()
-      .center([-74.0059, 40.7128])
-      .radius(5);
+      .center([highlight.lat, highlight.lon])
+      .radius(2);
 
     let circle = circleGenerator();
     let circlePath = path(circle);
 
-    let graticuleGenerator = d3.geoGraticule();
+    let externalCircleGenerator = d3.geoCircle()
+      .center([highlight.lat, highlight.lon])
+      .radius(4);
+    let externalCircle = externalCircleGenerator();
+    let externalCirclePath = path(externalCircle);
+
+    let graticuleGenerator = d3.geoGraticule()
+      .step([10,10]);
+
     let graticules = graticuleGenerator();
     let graticulePath = path(graticules);
 
     onMount(async function() {
-        const response = worlddata;
-        const json = response;
-        const land = feature(json, json.objects.land);
-        data = path(land);
+      const response = worlddata;
+      const json = response;
+      const land = feature(json, json.objects.land);
+      landPath = path(land);
     });
+
 </script>
 
 
-<svg>
-  <path d={graticulePath} class="graticules"></path>
-  <path d={data} class="border"/>
-  <path d={circlePath} class="circle"></path>
-</svg>
+<div class="globe">
+  <svg width={width} height={width}>
+    <path d={graticulePath} class="graticules"></path>
+    <path d={landPath} class="land"/>
+    <path d={circlePath} class="circle"></path>
+    <path d={externalCirclePath} class="external-circle"></path>
+  </svg>
+</div>
+
 
 <style>
 
-  .circle {
+  .external-circle {
+    stroke: #FCE587;
+    stroke-width: 1.25px;
+    fill:none;
+  }
 
+  .circle {
+    stroke-width: 0px;
+    fill: #FCE587;
   }
 
   .graticules {
     fill: none;
-    stroke-width: 0.15px;
+    stroke-width: 0.25px;
     stroke: #444444;
   }
 
-    svg {
-      width: 1000px;
-      height: 1000px;
-      background-color: blue;
-    }
-    .border {
-      stroke: #444444;
-      stroke-width: 0rem;
-    }
+  svg {
+    background: #6d608d;
+    border-radius: 50%;
+  }
+
+  .land {
+    stroke-width: 0px;
+    fill: #493870;
+  }
   </style>

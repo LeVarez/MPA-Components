@@ -1,8 +1,8 @@
 <script lang='ts'>
     import { onMount } from 'svelte';
-    import MenuSpy from './menuspy/menuspy';
+    import MenuSpy from './scripts/menuspy';
 
-    import type { MenuSpyParams} from './menuspy/menuspy';
+    import type { MenuSpyParams} from './scripts/menuspy';
     import * as animateScroll from "svelte-scrollto";
 
     export let menuOptions = []
@@ -10,10 +10,10 @@
     let elm : Element;
     let ms : MenuSpy;
     var msParams : MenuSpyParams = {
-        menuItemSelector : 'div[href^="#"]',
+        menuItemSelector : '[href^="#"]',
         activeClass: 'active',
-        threshold: 600,
-        enableLocationHash: false,
+        threshold: 150,
+        enableLocationHash: true,
         hashTimeout: 0,
         callback: null
     };
@@ -23,17 +23,15 @@
 
     onMount(() => {
         elm = document.querySelector('#main-menu');
+
         ms = new MenuSpy(elm, msParams);
-        getScreen();
     })
 
-    function getScreen () {
-        smallScreen = width < 1200;
-    }
+
 
 </script>
 
-<svelte:window bind:innerWidth={width} on:resize={getScreen}/>
+<svelte:window bind:innerWidth={width}/>
 <nav class="mainnav" id="main-menu">
     {#each menuOptions as option, i}
     <div
@@ -42,28 +40,32 @@
         {
         animateScroll.scrollTo({
             element: `#${option.id}`,
-            offset: smallScreen ? -24 : 24,
+
             onStart: () => {
-            ms.activateItem(ms.scrollItems[i]);
-            ms.dissableUpdate();
+                console.log(ms);
+                ms.activateItem(ms.scrollItems[i]);
+                ms.dissableUpdate();
             },
-            onDone: () => { ms.enableUpdate(); ms.tick(); }
+            onDone: () => { ms.enableUpdate(); }
         })
         }
+        id="{option.id}div"
     >
+    <div href='#{option.id}'>
         {option.title}
     </div>
+</div>
     {/each}
 
 </nav>
 
 <style>
     .mainnav{
-        position: absolute;
+        position: fixed;
         width: 215px;
 
         left: 66px;
-
+        z-index: 10;
         background: #F9F9F9;
         box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.1);
         border-radius: 0px 0px 20px 20px;
@@ -76,5 +78,10 @@
         font-size: 12px;
         font-weight: 300;
         line-height: 18px;
+        cursor: pointer;
+    }
+
+    .active{
+        font-weight: 700;
     }
 </style>

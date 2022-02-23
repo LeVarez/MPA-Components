@@ -1,14 +1,12 @@
 <script  lang="ts">
   import CircleMenu from './CircleMenu.svelte';
-  import CircularMenu from './CircleMenu.svelte';
   import TextSlider from './TextSlider2.svelte';
 
   export let title = "No title defined";
-  export let content = [];
+  export let content;
   export let componentsColor;
   export let backgroundImage = '/img/fishermans.png';
   export let backgroundColor = '#79d8df';
-
 
   let currentPageIndex = 0;
 
@@ -19,7 +17,7 @@
     <div class="title">{@html title}</div>
     <TextSlider
       bind:currentPageIndex={currentPageIndex}
-      slides={content}
+      slides={content.data}
       backgroundColor={componentsColor.backgroundColor}
       buttonColor={componentsColor.buttonColor}
       textColor={componentsColor.textColor}
@@ -29,15 +27,8 @@
   </div>
   <div class="right-side-block">
     <CircleMenu
-          data={content}
-          radius={140}
-          thickness={20}
-          x={200}
-          y={200}
-          gap={5}
-          color={componentsColor.backgroundColor}
-          unselectedColor = {componentsColor.unselectedColor}
-          borderColor={componentsColor.backgroundColor}
+          data={content.data}
+          config={content.menuSettings}
           bind:currentPageIndex={currentPageIndex}
     />
   </div>

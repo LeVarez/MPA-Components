@@ -3,15 +3,16 @@
 
     export let title = "No Title";
     export let content = ["No content defined"];
-    export let buttonText = "Learn More";
+    export let buttonText = "Learn More about " + title ;
     export let numShowedParagraph = 3;
+    export let id = 'noId';
 
     let currentShowedParagraph = numShowedParagraph;
 
-    let width, height;
+    export let width, height;
 </script>
 
-<div class="article" bind:clientWidth={width} bind:clientHeight={height} style="width: {width}px; height: {height};">
+<div class="article" style="width: {width}px; height: {height};" id={id}>
     <div class="title">{title}</div>
     <div class="content">
         {#each content as p, i}
@@ -43,6 +44,7 @@
     }
     .article{
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        margin: 20px 0 20px 0;
     }
 
     .article .title{

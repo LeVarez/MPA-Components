@@ -71,7 +71,7 @@ class MenuSpy {
     assignValues():void {
       this.currScrollTop = 0;
       this.lastInViewElm = null;
-      this.menuHeight = (this.element as HTMLElement).offsetHeight + this.options.threshold;
+      this.menuHeight = (this.element as HTMLElement).offsetHeight;
       this.menuItems = [].slice.call(this.element.querySelectorAll(this.options.menuItemSelector));
       this.raf = null;
     }
@@ -94,8 +94,8 @@ class MenuSpy {
       if(this.enable){
         this.cacheItems();
         this.scrollItems = this.scrollItems.filter(Boolean).sort((a, b) => a.offset - b.offset);
-        const fromTop = this.currScrollTop + this.menuHeight;
-        const inViewElms = this.scrollItems.filter((item) => item.offset < fromTop);
+        const fromTop = this.currScrollTop + this.options.threshold;
+        const inViewElms = this.scrollItems.filter((item) => { console.log(item.offset); return item.offset < fromTop });
         if(inViewElms.length > 0)this.activateItem(inViewElms.pop());
         else this.activateItem(this.scrollItems[0]);
       }

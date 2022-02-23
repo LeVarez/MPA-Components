@@ -1,9 +1,56 @@
-[
-    {"title": "Title 1", "percentatge": 20},
-    {"title": "Title 1", "percentatge": 20},
-    {"title": "Title 1", "percentatge": 10},
-    {"title": "Title 1", "percentatge": 5},
-    {"title": "Title 1", "percentatge": 5},
-    {"title": "Title 1", "percentatge": 10},
-    {"title": "Title 1", "percentatge": 30}
-]
+{
+    "data" : [
+        {
+            "title": "Title 1",
+            "percentatge": 20,
+            "group": 1
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 20,
+            "group": 2
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 10,
+            "group": 3
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 5,
+            "group": 4
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 5,
+            "group": 4
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 10,
+            "group": 4
+        },
+        {
+            "title": "Title 1",
+            "percentatge": 30,
+            "group": 5
+        }
+    ],
+    "menuSettings" : {
+        "radius" : 100,
+        "thickness" : {
+            "unselected" : 20,
+            "group" : 30,
+            "gain" : 20
+        },
+        "x" : 150,
+        "y" : 150,
+        "gap" : 3,
+        "color" : {
+            "unselected" : "#00000020",
+            "selected" : "#fbe26b",
+            "border" : "#00000020"
+        },
+        "initialIndex" : 0
+    }
+}

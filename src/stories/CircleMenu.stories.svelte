@@ -22,13 +22,7 @@
   <Template let:args>
     <CircleMenu
         data={args.data}
-        radius={args.radius}
-        thickness={args.thickness}
-        x={args.x}
-        y={args.y}
-        gap={args.gap}
-        color={args.color}
-        borderColor={args.borderColor}
+        config={args.config}
     />
   </Template>
 
@@ -36,95 +30,10 @@
   <Story
     name="Example 1"
     args={{
-      data: data,
-
-      radius : 100,
-      thickness : 20,
-      x : 150,
-      y : 150,
-      gap : 3,
-      color : "#fbe26b",
-      borderColor : "#fbe26b",
-
+      data: data.data,
+      config: data.menuSettings
     }}
   />
 
-  <Story
-    name="Example 2"
-    args={{
-      data: data,
 
-      radius : 50,
-      thickness : 5,
-      x : 150,
-      y : 150,
-      gap : 3,
-      color : "#fbe26b",
-      borderColor : "#fbe26b",
-
-    }}
-  />
-
-  <Story
-    name="Example 3"
-    args={{
-      data: data,
-
-      radius : 50,
-      thickness : 80,
-      x : 150,
-      y : 150,
-      gap : 0,
-      color : "#fbe26b",
-      borderColor : "#fbe26b",
-
-    }}
-  />
-
-  <Story
-    name="Example 3"
-    args={{
-      data: data,
-
-      radius : 50,
-      thickness : 80,
-      x : 150,
-      y : 150,
-      gap : 0,
-      color : "#ed76d9",
-      borderColor : "#ed76d9",
-
-    }}
-  />
-
-  <Story
-    name="Example 5"
-    args={{
-      data: data,
-
-      radius : 50,
-      thickness : 80,
-      x : 150,
-      y : 150,
-      gap : 0,
-      color : "#0DD0B4",
-      borderColor : "#033e36",
-
-    }}
-  />
-  <Story
-    name="Example 5"
-    args={{
-      data: data,
-
-      radius : 0,
-      thickness : 80,
-      x : 150,
-      y : 150,
-      gap : 0,
-      color : "#8a2be2",
-      borderColor : "#6e22b4",
-
-    }}
-  />
 

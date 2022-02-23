@@ -1,24 +1,10 @@
 <script lang='ts'>
-import { element } from 'svelte/internal';
 
     import CircularSegment from './CircularSegment.svelte';
 
-   //         radius = {args.radius}
-   //         thickness = {args.thickness}
-    //        x = {args.x}
-    //        y = {args.y}
-    //        color = {args.color}
-    //        borderColor = {args.borderColor}
     export let data : MenuElement[];
     export let config : CircleMenuConfig;
-
-    let currentPageIndex = config.initialIndex;
-    let currentGroup = data[currentPageIndex].group;
-
-    enum ColorSelector {
-        border,
-        fill
-    }
+    export let currentPageIndex : number = config.initialIndex;
 
     interface Segment {
         startAngle : number;
@@ -71,7 +57,6 @@ import { element } from 'svelte/internal';
 
     let handleSegmentClick = (index : number) => {
         currentPageIndex = index;
-        currentGroup = data[currentPageIndex].group;
     }
     let menuSegments = calcSegments();
 </script>
@@ -84,12 +69,14 @@ import { element } from 'svelte/internal';
         endAngle = {segment.endAngle}
         radius = {config.radius}
         thickness = {data[currentPageIndex].group === segment.element.group ? config.thickness.group : config.thickness.unselected}
+        thicknessGain = {config.thickness.selected}
         gap = {config.gap}
         x = {config.x}
         y = {config.y}
-        color = {currentPageIndex === i || data[currentPageIndex].group === segment.group? config.color.selected : config.color.unselected}
-        borderColor = {currentPageIndex === i || data[currentPageIndex].group === segment.group? config.color.selected : config.color.unselected}
+        color = {data[currentPageIndex].group === segment.element.group? currentPageIndex === i? config.color.selected: config.color.selected : config.color.unselected}
+        borderColor = {data[currentPageIndex].group === segment.element.group? currentPageIndex === i? config.color.selected: config.color.selected : config.color.unselected}
         selected = {currentPageIndex === i}
+        transparency = {currentPageIndex !== i}
         onClickFn = {() => {handleSegmentClick(i)}}
     />
     {/each}

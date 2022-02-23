@@ -8,8 +8,6 @@
   export let backgroundImage = '/img/fishermans.png';
   export let backgroundColor = '#79d8df';
 
-
-
   let currentPageIndex = 0;
 
 </script>
@@ -31,6 +29,7 @@
     <CircleMenu
           data={content.data}
           config={content.menuSettings}
+          bind:currentPageIndex={currentPageIndex}
     />
   </div>
 

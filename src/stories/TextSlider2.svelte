@@ -1,25 +1,25 @@
 <script lang='ts'>
     import {Splide, SplideSlide} from "@splidejs/svelte-splide";
     import { onMount } from "svelte";
-
+    import './styles.css';
     import CarouselDots from './CarouselDots.svelte'
 
-    export let backgroundColor = '#fbe26b';
-    export let buttonColor = '#fbe26b';
-    export let textColor = '#202020';
-    export let slides:Slide[] = [];
-    export let currentPageIndex = 0;
-    export let width = 800;
-    export let height = 300;
+    export let backgroundColor : string = '#fbe26b';
+    export let buttonColor : string = '#fbe26b';
+    export let textColor : string = '#202020';
+    export let slides : Slide[] = [];
+    export let currentPageIndex : number = 0;
+    export let width : number = 800;
+    export let height : number = 300;
 
     interface Slide{
 		title: string;
 		content: string;
     }
 
-    let splide;
-    let controller;
-    let splideElement;
+    let splide : any;
+    let controller : any;
+    let splideElement : HTMLElement;
 
 
     onMount(() => {
@@ -45,12 +45,16 @@
 
 <div class="container" style="background-color: {backgroundColor};">
     <Splide
-    options={ {
+    options={{
         rewind: true,
         width : width,
         height : height,
         gap: -3,
-    } }
+        classes: {
+            pagination : 'vanish',
+            arrows: 'vanish',
+        },
+    }}
     bind:this={splide}
     on:move={handleMove}
     >
@@ -65,7 +69,6 @@
         {#each slides as slide}
         <SplideSlide>
             <div  class="slide" style="background: {backgroundColor};">
-            <!--<div class="img"/>-->
             <div class="info" style="color: {textColor};">
                 <div class="title">{slide.title}</div>
                 <div class="content">{slide.content}</div>
@@ -86,13 +89,8 @@
 
 <style type="text/postcss">
     @import "https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css";
-    :global(.splide__arrow){
-        display: none !important;
-    }
-    :global(.splide__pagination){
-        display: none !important;
-    }
-    :global(.splide__track){
+
+    .container :global(.splide__track){
         border-radius: 15px;
     }
 

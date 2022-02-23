@@ -1,34 +1,18 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import * as anime from 'animejs';
-
-    //Desing properties
     export let startAngle : number;
     export let endAngle : number;
     export let radius : number;
-    export let thickness ;
+    export let thickness : number = 20 ;
+    export let thicknessGain : number = 20;
     export let x : number;
     export let y : number;
-    export let color = '#fbe26b'
-    export let borderColor = 'black'
-    export let gap = 0;
-    export let thicknessGain = 20;
-
-    export let selected = false;
+    export let color : string= '#fbe26b'
+    export let borderColor : string = 'black'
+    export let gap : number = 0;
+    export let transparency : boolean = false;
+    export let animationDuration : number = 0.3;
+    export let selected : boolean = false;
     export let onClickFn = () => {}
-
-    let currentThicknessGain = thicknessGain;
-    let currentThickness = thickness;
-
-    let selectedAnimation : SVGAnimationElement;
-    let unselectedAnimation : SVGAnimationElement;
-
-    let animated = false;
-
-
-    onMount(() => {
-
-    })
 
     let describeArc = (x:number, y:number, radius:number, thickness:number, startAngle:number, endAngle:number) => {
 
@@ -59,58 +43,45 @@
         };
     }
 
-    let handleMouseEnter = () => {
-        animated = true;
-        if(animated && !selected) {
-            selectedAnimation.beginElement();
-        }
-    }
-    let handelMouseLeave = () => {
-        animated = true;
-        if(animated && !selected) {
-            animated = false;
-            unselectedAnimation.beginElement();
-        }
-
-
-    }
-
-    let selectedState : string = describeArc(x,y,radius, thickness + currentThicknessGain,startAngle + gap/2 ,endAngle - gap/2);
+    let selectedState : string = describeArc(x,y,radius, thickness + thicknessGain,startAngle + gap/2 ,endAngle - gap/2);
     let unselectedState : string = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
-    let initialState = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
+    let currentState : string = unselectedState;
 
-    $:
-    if(selected && selectedAnimation) handleMouseEnter();
-    else if(unselectedAnimation && thickness) handelMouseLeave();
-
-    $:if(thickness && unselectedAnimation && !selected){
+    $: if(thickness) {
         unselectedState = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
-
-        unselectedAnimation.beginElement()
+        currentState = unselectedState;
     }
+
+    $: if(selected) {
+        currentState = selectedState;
+    }
+    else {
+        currentState = unselectedState
+    }
+
 </script>
 
-
-<path class="segment shadow"
-on:mouseenter={handleMouseEnter}
-on:mouseleave={handelMouseLeave}
-fill={color}
-stroke={borderColor}
-d={initialState}
-on:click={onClickFn}>
-
-    <animate bind:this={selectedAnimation} begin="indefinite" attributeName="d" to={selectedState} dur="1s" fill="freeze"/>
-    <animate  bind:this={unselectedAnimation} begin="indefinite" attributeName="d" to={unselectedState} dur="1s" fill="freeze"/>
-
-</path>
+<path class="pointer shadow"
+    class:transparency='{transparency}'
+    fill={color}
+    stroke={borderColor}
+    d={currentState}
+    on:click={onClickFn}
+    on:mouseenter={() => {if(!selected)currentState = selectedState}}
+    on:mouseleave={() => {if(!selected)currentState = unselectedState}}
+    style="transition: d {animationDuration}s;"
+/>
 
 <style>
-    .segment{
+    .pointer{
         cursor: pointer;
     }
     .shadow {
 
-        filter: drop-shadow( 5px 5px 15px 5px #000000);
+        filter: drop-shadow( 3px 5px 2px rgb(0 0 0 / 0.4));
         /* Similar syntax to box-shadow */
+    }
+    .transparency{
+        opacity: 0.7;
     }
 </style>

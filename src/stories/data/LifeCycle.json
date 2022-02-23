@@ -46,17 +46,17 @@
     "menuSettings" : {
         "radius" : 100,
         "thickness" : {
-            "unselected" : 10,
+            "unselected" : 20,
             "group" : 30,
-            "selected" : 30
+            "gain" : 20
         },
         "x" : 150,
         "y" : 150,
         "gap" : 3,
         "color" : {
-            "unselected" : "#fbe26b",
+            "unselected" : "#00000020",
             "selected" : "#fbe26b",
-            "border" : "#fbe26b"
+            "border" : "#00000020"
         },
         "initialIndex" : 0
     }

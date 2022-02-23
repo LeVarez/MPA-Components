@@ -1,8 +1,8 @@
 <script lang='ts'>
     import { onMount } from 'svelte';
-    import MenuSpy from './menuspy/menuspy';
+    import MenuSpy from './scripts/menuspy';
 
-    import type { MenuSpyParams} from './menuspy/menuspy';
+    import type { MenuSpyParams} from './scripts/menuspy';
     import * as animateScroll from "svelte-scrollto";
 
     export let menuOptions = []
@@ -12,8 +12,8 @@
     var msParams : MenuSpyParams = {
         menuItemSelector : '[href^="#"]',
         activeClass: 'active',
-        threshold: 0,
-        enableLocationHash: false,
+        threshold: 150,
+        enableLocationHash: true,
         hashTimeout: 0,
         callback: null
     };
@@ -23,17 +23,15 @@
 
     onMount(() => {
         elm = document.querySelector('#main-menu');
+
         ms = new MenuSpy(elm, msParams);
-        getScreen();
     })
 
-    function getScreen () {
-        smallScreen = width < 1200;
-    }
+
 
 </script>
 
-<svelte:window bind:innerWidth={width} on:resize={getScreen}/>
+<svelte:window bind:innerWidth={width}/>
 <nav class="mainnav" id="main-menu">
     {#each menuOptions as option, i}
     <div
@@ -42,15 +40,15 @@
         {
         animateScroll.scrollTo({
             element: `#${option.id}`,
-            offset: smallScreen ? -24 : 24,
+
             onStart: () => {
-            ms.activateItem(ms.scrollItems[i]);
-            ms.dissableUpdate();
+                console.log(ms);
+                ms.activateItem(ms.scrollItems[i]);
+                ms.dissableUpdate();
             },
-            onDone: () => { ms.enableUpdate(); ms.tick(); }
+            onDone: () => { ms.enableUpdate(); }
         })
         }
-        href='#{option.id}'
         id="{option.id}div"
     >
     <div href='#{option.id}'>

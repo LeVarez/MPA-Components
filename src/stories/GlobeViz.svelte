@@ -75,11 +75,12 @@
   svg {
     background: #6d608d;
     border-radius: 50%;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
   }
 
   .land {
     stroke-width: 0px;
     fill: #493870;
   }
-  
+
   </style>

@@ -12,7 +12,7 @@
     const RollOffset = 0;
 
     const projection = d3.geoOrthographic();
-    projection.rotate([19, -19 + LatitudeOffset, RollOffset]);
+    projection.rotate([-highlight.lon + LongitudeOffset, -highlight.lat + LatitudeOffset, RollOffset]);
     projection.scale(width/2);
     projection.translate([width/2, width/2]);
     const path = d3.geoPath().projection(projection);

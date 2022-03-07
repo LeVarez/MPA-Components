@@ -59,6 +59,12 @@
         currentState = unselectedState
     }
 
+    $: if(radius) {
+        selectedState = describeArc(x,y,radius, thickness + thicknessGain,startAngle + gap/2 ,endAngle - gap/2);
+        unselectedState = describeArc(x,y,radius, thickness,startAngle + gap/2 ,endAngle - gap/2);
+        currentState = unselectedState;
+    }
+
 </script>
 
 <path class="pointer shadow"

@@ -1,4 +1,5 @@
 <script lang="ts">
+
     export let tag: string;
     export let alt: string;
     let style:string;

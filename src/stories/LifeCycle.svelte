@@ -1,34 +1,81 @@
 <script  lang="ts">
   import CircleMenu from './CircleMenu.svelte';
   import TextSlider from './TextSlider2.svelte';
+  import type {CircleMenuConfig, MenuElement, TextSlide} from '../interfaces';
 
   export let title = "No title defined";
-  export let content;
+  export let data : LifeCycleData;
   export let componentsColor;
   export let backgroundImage = '/img/fishermans.png';
   export let backgroundColor = '#79d8df';
 
-  let currentPageIndex = 0;
+  let width : number = 0;
+  let initialCircularMenuConfig : CircleMenuConfig = JSON.parse(JSON.stringify(data.circularMenu.config))
+  let textSliderWidth : number = 560;
+  let textSliderHeight : number = 270;
+
+  interface LifeCycleData {
+    slides : TextSlide[];
+    circularMenu : {
+      data : MenuElement[],
+      config : CircleMenuConfig
+    }
+  }
+
+  let currentPageIndex : number = 0;
+
+  let resizeObjectProperties = function(multiplier : number) {
+    data.circularMenu.config.x = initialCircularMenuConfig.x * multiplier;
+    data.circularMenu.config.y = initialCircularMenuConfig.y * multiplier;
+    data.circularMenu.config.radius = initialCircularMenuConfig.radius * multiplier;
+    data.circularMenu.config.width = initialCircularMenuConfig.width * multiplier;
+    data.circularMenu.config.height = initialCircularMenuConfig.height * multiplier;
+    data.circularMenu.config.thickness.gain = initialCircularMenuConfig.thickness.gain * multiplier;
+    data.circularMenu.config.thickness.group = initialCircularMenuConfig.thickness.group * multiplier;
+    data.circularMenu.config.thickness.unselected = initialCircularMenuConfig.thickness.unselected * multiplier;
+  };
+
+  let resizeElements = () => {
+    if(width > 1300) {
+      data.circularMenu.config = JSON.parse(JSON.stringify(initialCircularMenuConfig));
+      textSliderWidth = 560;
+      textSliderHeight = 270;
+    }
+    else if (width > 1000) {
+      resizeObjectProperties(0.7);
+      textSliderHeight = 270 * 0.75;
+      textSliderWidth = 560 * 0.75;
+    }
+    else if (width > 600) {
+      resizeObjectProperties(0.5);
+    }
+  }
+
+  $: if(width) {
+    resizeElements();
+  }
 
 </script>
-
+<svelte:window bind:innerWidth={width}/>
 <div class="container" style="background-image: url('{backgroundImage}'); background-color: {backgroundColor}80">
-  <div class="left-side-block">
+  <div class="block">
     <div class="title">{@html title}</div>
-    <TextSlider
-      bind:currentPageIndex={currentPageIndex}
-      slides={content.data}
-      backgroundColor={componentsColor.backgroundColor}
-      buttonColor={componentsColor.buttonColor}
-      textColor={componentsColor.textColor}
-      width={500}
-      height={250}
-    />
+    <div class="textSlider">
+      <TextSlider
+        bind:currentPageIndex={currentPageIndex}
+        slides={data.slides}
+        backgroundColor={componentsColor.backgroundColor}
+        buttonColor={componentsColor.buttonColor}
+        textColor={componentsColor.textColor}
+        bind:width={textSliderWidth}
+        bind:height={textSliderHeight}
+      />
+    </div>
   </div>
-  <div class="right-side-block">
+  <div class="block">
     <CircleMenu
-          data={content.data}
-          config={content.menuSettings}
+          data={data.circularMenu.data}
+          bind:config={data.circularMenu.config}
           bind:currentPageIndex={currentPageIndex}
     />
   </div>
@@ -37,26 +84,43 @@
 
 <style>
   .container{
-    width: 100%;
-    height: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: inherit;
+    height: inherit;
     background-size: cover;
+    padding: 40px 40px 40px 40px;
+    height: 600px;
   }
 
-  .left-side-block{
-    margin-left: 30px;
-    margin-top: 50px;
-    float: left;
-    width: 50%;
+  .block{
+    height: inherit;
+    overflow: hidden;
   }
 
-  .right-side-block{
-    margin-top: 70px;
-    float: right;
-  }
-
-  .left-side-block .title{
+  .block .title{
     font-size: 50px;
     margin-bottom: 50px;
+    width: 400px;
   }
 
+  .textSlider{
+    padding-bottom: 160px;
+  }
+
+  @media (max-width: 1300px) {
+    .container {
+      height: 400px;
+    }
+    .block .title{
+      font-size: 35px;
+      margin-bottom: 40px;
+      width: 400px;
+    }
+  }
+  @media (max-width: 600px) {
+    .container {
+      height: 200px;
+    }
+  }
 </style>

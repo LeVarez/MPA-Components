@@ -9,7 +9,8 @@
 
     let currentShowedParagraph = numShowedParagraph;
 
-    export let width, height;
+    export let width : number;
+    export let height : number = undefined;
 </script>
 
 <div class="article" style="width: {width}px; height: {height};" id={id}>

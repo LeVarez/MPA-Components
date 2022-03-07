@@ -1,43 +1,14 @@
 <script lang='ts'>
 
     import CircularSegment from './CircularSegment.svelte';
+    import type {MenuElement, CircleMenuConfig, Segment} from '../interfaces';
 
     export let data : MenuElement[];
     export let config : CircleMenuConfig;
-    export let currentPageIndex : number = config.initialIndex;
+    export let currentPageIndex : number = 0;
 
-    interface Segment {
-        startAngle : number;
-        endAngle : number;
-        element : MenuElement;
-    }
-    interface MenuElement {
-        percentatge : number;
-        group : number;
-        title : string;
-    }
-
-    interface CircleMenuThickness{
-        unselected : number;
-        group : number;
-        selected : number;
-    }
-
-    interface CircleMenuColors{
-        selected : string;
-        unselected : string;
-        border : string;
-    }
-
-    interface CircleMenuConfig{
-        radius : number;
-        thickness : CircleMenuThickness
-        x : number;
-        y : number;
-        gap : number;
-        color : CircleMenuColors;
-        initialIndex: number;
-    }
+    let width : number = config.width || 400;
+    let height : number = config.height || 400;
 
     let calcSegments = () => {
         let menuSegments = [];
@@ -59,17 +30,24 @@
         currentPageIndex = index;
     }
     let menuSegments = calcSegments();
+
+    $: if(config) {
+        width = config.width || 400;
+        height = config.height || 400;
+    }
 </script>
 
-<svg width="400" height="400">
+
+<svg style="width: {width}; height: {height};">
     {#each menuSegments as segment, i}
+    {#if config}
     <CircularSegment
         bind:this={segment.ref}
         startAngle = {segment.startAngle}
         endAngle = {segment.endAngle}
         radius = {config.radius}
         thickness = {data[currentPageIndex].group === segment.element.group ? config.thickness.group : config.thickness.unselected}
-        thicknessGain = {config.thickness.selected}
+        thicknessGain = {config.thickness.gain}
         gap = {config.gap}
         x = {config.x}
         y = {config.y}
@@ -78,6 +56,14 @@
         selected = {currentPageIndex === i}
         transparency = {currentPageIndex !== i}
         onClickFn = {() => {handleSegmentClick(i)}}
+        animationDuration = {config.animationDuration}
     />
+    {/if}
     {/each}
 </svg>
+
+<style>
+    svg{
+        transition: width 1s, height 1s;
+    }
+</style>

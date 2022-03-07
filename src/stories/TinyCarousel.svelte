@@ -85,7 +85,7 @@
         height: auto;
         box-shadow: inset 0px 2px 12px rgba(0, 0, 0, 0.05);
         border-radius: 40px 0px 0px 40px;
-        padding: 22px 25px 30px 25px;
+        padding: 22px 0 30px 25px;
         float: right;
     }
     .title{

@@ -1,38 +1,53 @@
-<script lang='ts'>
-    import TextSection from "./stories/TextSection.svelte";
-    import TextSlider from "./stories/TextSlider2.svelte";
-    import CircleMenu from "./stories/CircleMenu.svelte"
-    import content from './stories/data/TextSlider.json';
-import { text } from "svelte/internal";
-
-    let currentPageIndex = 0;
-    let backgroundColor = "#fbe26b";
-    let buttonColor = "#fbe26b";
-    let textColor = "#202020";
+<script>
+    import BurgerMenu from 'svelte-burger-menu';
+    import { Router, Link, Route } from "svelte-routing";
+    import TextSlider from './TextSlider.svelte';
+    import TinyCarousel from './TinyCarousel.svelte';
+    import StickyMenu from './StickyMenu.svelte';
+    import TagsMenu from './TagsMenu.svelte';
+    import LifeCycle from './LifeCycle.svelte';
 </script>
 
+<Router>
 
-<div>
-<TextSlider
-    bind:currentPageIndex={currentPageIndex}
-    slides={content}
-    backgroundColor={backgroundColor}
-    buttonColor={buttonColor}
-    textColor={textColor}
-/>
-<CircleMenu
-        data={content}
-        radius={100}
-        thickness={20}
-        x={150}
-        y={150}
-        gap={5}
-        color={backgroundColor}
-        borderColor={backgroundColor}
-        bind:currentPageIndex={currentPageIndex}
-/>
-</div>
+    <BurgerMenu padding={'25px'}>
+        <Link to="/textSlider">Text Slider</Link>
+        <Link to="/tinyCarousel">Tiny Carousel</Link>
+        <Link to="/stickyMenu">Sticky Menu</Link>
+        <Link to="/tagsMenu">Tags Menu</Link>
+        <Link to="/lifeCycle">Life Cycle</Link>
+    </BurgerMenu>
+
+    <div class="content">
+        <Route path="/textSlider">
+            <TextSlider/>
+        </Route>
+        <Route path="/tinyCarousel">
+            <TinyCarousel/>
+        </Route>
+        <Route path="/stickyMenu">
+            <StickyMenu/>
+        </Route>
+        <Route path="/tagsMenu">
+            <TagsMenu/>
+        </Route>
+        <Route path="/lifeCycle">
+            <LifeCycle/>
+        </Route>
+    </div>
+</Router>
+
 
 <style type="text/postcss">
+    :global(.svelte-1pft1nn){
+        z-index: 10 !important;
+    }
+    :global(.svelte-1jfmuiu){
+        z-index: 9 !important;
+    }
 
+    .content{
+        z-index: 1 !important;
+        margin-left: 50px;
+    }
 </style>

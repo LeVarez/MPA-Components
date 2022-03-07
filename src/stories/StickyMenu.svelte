@@ -19,6 +19,7 @@
     };
 
     let width : number;
+    let height : number
     let smallScreen : boolean;
 
     onMount(() => {
@@ -31,46 +32,44 @@
 
 </script>
 
-<svelte:window bind:innerWidth={width}/>
-<nav class="mainnav" id="main-menu">
-    {#each menuOptions as option, i}
-    <div
-        class='menuoption {i === 0 ? "active" : ""}'
-        on:click=
-        {
-        animateScroll.scrollTo({
-            element: `#${option.id}`,
+<div class="mainnav">
+    <nav id="main-menu">
+        {#each menuOptions as option, i}
+        <div
+            class='menuoption {i === 0 ? "active" : ""}'
+            on:click=
+            {
+            animateScroll.scrollTo({
+                element: `#${option.id}`,
 
-            onStart: () => {
-                console.log(ms);
-                ms.activateItem(ms.scrollItems[i]);
-                ms.dissableUpdate();
-            },
-            onDone: () => { ms.enableUpdate(); }
-        })
-        }
-        id="{option.id}div"
-    >
-    <div href='#{option.id}'>
-        {option.title}
+                onStart: () => {
+                    console.log(ms);
+                    ms.activateItem(ms.scrollItems[i]);
+                    ms.dissableUpdate();
+                },
+                onDone: () => { ms.enableUpdate(); }
+            })
+            }
+            id="{option.id}div"
+        >
+        <div href='#{option.id}'>
+            {option.title}
+        </div>
     </div>
+        {/each}
+
+    </nav>
 </div>
-    {/each}
-
-</nav>
-
 <style>
     .mainnav{
-        position: fixed;
-        width: 215px;
-
         left: 66px;
-        z-index: 10;
+        z-index: 5;
         background: #F9F9F9;
         box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.1);
         border-radius: 0px 0px 20px 20px;
         padding-top: 31px;
         padding-bottom: 29px;
+        width: inherit;
     }
     .menuoption{
         margin: 10px 40px 0px 28px;

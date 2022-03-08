@@ -23,6 +23,18 @@
     let yScroll : number = 0;
     let overflowActive : boolean = false;
 
+    let options =
+    {
+        rewind: true,
+        width : width,
+        height : height,
+        gap: -3,
+        classes: {
+            pagination : 'vanish',
+            arrows: 'vanish',
+        },
+    }
+
     function parseScroll(e) {
         let element = e.target;
         yScroll= element.scrollTop;
@@ -76,21 +88,14 @@
     $: if(yScroll > 0) document.documentElement.classList.remove('no-scrollbars');
        else document.documentElement.classList.add('no-scrollbars');
 
+    $: if(width) options.width = width;
 
+    $: if(options) console.log(options);
 </script>
 
 <div class="container" style="background-color: {backgroundColor};">
     <Splide
-    options={{
-        rewind: true,
-        width : width,
-        height : height,
-        gap: -3,
-        classes: {
-            pagination : 'vanish',
-            arrows: 'vanish',
-        },
-    }}
+    bind:options={options}
     bind:this={splide}
     on:move={handleMove}
     >
@@ -146,7 +151,7 @@
 
     .container{
         border-radius: 15px;
-        width: 100%;
+        width: max-content;
     }
     .navigationButtons{
         width: 100px;

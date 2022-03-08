@@ -11,7 +11,7 @@
 
   let width : number = 0;
   let initialCircularMenuConfig : CircleMenuConfig = JSON.parse(JSON.stringify(data.circularMenu.config))
-  let textSliderWidth : number = 560;
+  let textSliderWidth : number = 570;
   let textSliderHeight : number = 270;
 
   interface LifeCycleData {
@@ -38,21 +38,27 @@
   let resizeElements = () => {
     if(width > 1300) {
       data.circularMenu.config = JSON.parse(JSON.stringify(initialCircularMenuConfig));
-      textSliderWidth = 560;
+      textSliderWidth = 570;
       textSliderHeight = 270;
     }
-    else if (width > 1000) {
+    else if (width > 1000 && width <= 1300) {
       resizeObjectProperties(0.7);
-      textSliderHeight = 270 * 0.75;
-      textSliderWidth = 560 * 0.75;
+      textSliderHeight = 270 * 0.7;
+      textSliderWidth = 570 * 0.7;
     }
-    else if (width > 600) {
+    else if (width > 600 && width <= 1000) {
       resizeObjectProperties(0.5);
+      textSliderWidth = 570 * 0.5;
+      textSliderHeight = 270 * 0.5;
     }
   }
 
   $: if(width) {
     resizeElements();
+  }
+
+  $: if(textSliderWidth){
+    console.log(textSliderWidth);
   }
 
 </script>
@@ -67,8 +73,8 @@
         backgroundColor={componentsColor.backgroundColor}
         buttonColor={componentsColor.buttonColor}
         textColor={componentsColor.textColor}
-        bind:width={textSliderWidth}
-        bind:height={textSliderHeight}
+        width={textSliderWidth}
+        height={textSliderHeight}
       />
     </div>
   </div>
@@ -86,8 +92,8 @@
   .container{
     display: grid;
     grid-template-columns: auto auto;
-    width: inherit;
     height: inherit;
+    width: inherit;
     background-size: cover;
     padding: 40px 40px 40px 40px;
     height: 600px;

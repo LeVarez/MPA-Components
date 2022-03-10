@@ -21,6 +21,7 @@ export interface TagParameters {
     tag : string;
     alt : string;
     group? : number;
+    index? : number;
 };
 
 export interface TagsMenu {

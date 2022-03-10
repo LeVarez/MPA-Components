@@ -2,6 +2,7 @@
   import CircleMenu from './CircleMenu.svelte';
   import TextSlider from './TextSlider2.svelte';
   import type {CircleMenuConfig, MenuElement, TextSlide} from '../interfaces';
+import { onMount } from 'svelte';
 
   export let title = "No title defined";
   export let data : LifeCycleData;
@@ -11,8 +12,14 @@
 
   let width : number = 0;
   let initialCircularMenuConfig : CircleMenuConfig = JSON.parse(JSON.stringify(data.circularMenu.config))
-  let textSliderWidth : number = 570;
-  let textSliderHeight : number = 270;
+
+  let textSliderWidth : number;
+  let textSliderHeight : number;
+
+  onMount(() =>{
+    textSliderWidth = 570;
+    textSliderHeight = 270;
+  })
 
   interface LifeCycleData {
     slides : TextSlide[];

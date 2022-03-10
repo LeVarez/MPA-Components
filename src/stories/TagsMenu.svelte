@@ -4,10 +4,13 @@
     import type {TagsMenu, TagParameters} from '../interfaces';
     import type {CircleMenuConfig} from '../interfaces';
 
+
     export let data : TagsMenu;
 
     let width : number = 0;
     let initialCircularMenuConfig : CircleMenuConfig = JSON.parse(JSON.stringify(data.circularMenuConfig))
+
+    data.wherein.map((e, i) => e.index = i);
 
     let menuData = data.wherein.map((tag : TagParameters, i : number) => {
         return {
@@ -18,8 +21,11 @@
     });
 
     let currentPageIndex = 0;
+    let currentTagIndex = 0;
+    let wherein = data.wherein.filter((e) => data.wherein[currentPageIndex].group == e.group);
 
-    let wherein = data.wherein.filter((e) => data.wherein[currentPageIndex].group == e.group)
+
+
 
     let resizeObjectProperties = function(multiplier : number) {
         data.circularMenuConfig.x = initialCircularMenuConfig.x * multiplier;
@@ -41,13 +47,18 @@
         }
     }
 
-    $: if(currentPageIndex || currentPageIndex == 0){
-        wherein = data.wherein.filter((e) => data.wherein[currentPageIndex].group == e.group)
+    $: if(currentPageIndex || currentPageIndex === 0){
+        wherein = data.wherein.filter((e) => data.wherein[currentPageIndex].group == e.group);
     }
+
+
 
     $: if (width) {
         resizeElements();
     }
+
+    $: console.log(currentTagIndex)
+
 </script>
 <svelte:window bind:innerWidth={width}></svelte:window>
 <div class='container'>
@@ -60,7 +71,7 @@
                 bind:currentPageIndex={currentPageIndex}
             ></CircleMenu>
         </div>
-        <div class="tagContainer"><TagContainer tags={wherein} width={285}/></div>
+        <div class="tagContainer"><TagContainer tags={wherein} width={285} bind:selectedIndex={currentPageIndex}/></div>
     </div>
     <h5 class='title'>What&apos;s this about</h5>
     <div class="tagContainer"><TagContainer tags={data.whatsabout} width={285}  carousel={width <= 900? true : false}/></div>

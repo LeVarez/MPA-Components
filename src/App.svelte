@@ -6,6 +6,7 @@
     import StickyMenu from './StickyMenu.svelte';
     import TagsMenu from './TagsMenu.svelte';
     import LifeCycle from './LifeCycle.svelte';
+    import BusinessModelCanvas from './BusinessModelCanvas.svelte';
 </script>
 
 <Router>
@@ -16,6 +17,7 @@
         <Link to="/stickyMenu">Sticky Menu</Link>
         <Link to="/tagsMenu">Tags Menu</Link>
         <Link to="/lifeCycle">Life Cycle</Link>
+        <Link to="/businessmodelcanvas">Business Model Canvas</Link>
     </BurgerMenu>
 
     <div class="content">
@@ -33,6 +35,9 @@
         </Route>
         <Route path="/lifeCycle">
             <LifeCycle/>
+        </Route>
+        <Route path="/businessmodelcanvas">
+            <BusinessModelCanvas/>
         </Route>
     </div>
 </Router>

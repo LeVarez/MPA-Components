@@ -1,19 +1,17 @@
 <script lang="ts">
     import { Splide, SplideSlide } from "@splidejs/svelte-splide";
-import Tag from "./Tag.svelte";
+    import type {TagParameters} from '../interfaces';
+    import Tag from "./Tag.svelte";
 
-    interface tagParameters {tag: string, alt: string};
-    interface cardParameters {
-        tags: tagParameters[],
-        cardType: 'chapter' | 'case study',
-        category: string,
-        title: string,
-        previewImage: string
-    }
-
-    export let tags: tagParameters[];
+    export let tags: TagParameters[];
     export let width:number;
     export let carousel : boolean = false;
+    export let selectedIndex : number = -1;
+
+    let onClickFn = (index : number) => {
+        selectedIndex = tags[index].index;
+    }
+
 </script>
 
 <div class="tag-container" style="max-width:{width}px">
@@ -27,15 +25,15 @@ import Tag from "./Tag.svelte";
         autoWidth: true,
       } }>
 
-        {#each tags as t}
+        {#each tags as t, i}
         <SplideSlide>
-            <Tag tag={t.tag} alt={t.alt}/>
+            <Tag tag={t.tag} alt={t.index === selectedIndex || selectedIndex === -1? t.alt : 'fading'}/>
         </SplideSlide>
         {/each}
     </Splide>
     {:else}
-    {#each tags as t}
-           <Tag tag={t.tag} alt={t.alt}/>
+    {#each tags as t, i}
+           <Tag tag={t.tag} alt={t.index === selectedIndex || selectedIndex === -1? t.alt : 'fading'} onClickFn={() => onClickFn(i)}/>
     {/each}
     {/if}
 </div>

@@ -1,0 +1,8 @@
+.tile {
+    display: block;
+    position: absolute;
+    background-color: yellowgreen;
+    color: #3A3A4D;
+    padding: 5px;
+    font-weight: bold;
+  }

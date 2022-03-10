@@ -7251,6 +7251,11 @@
     "merge-stream" "^2.0.0"
     "supports-color" "^8.0.0"
 
+"jquery@^3.6.0":
+  "integrity" "sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw=="
+  "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
+  "version" "3.6.0"
+
 "js-string-escape@^1.0.1":
   "integrity" "sha1-4mJbrbwNZ8dTPp7cEGjFh65BN+8="
   "resolved" "https://registry.npmjs.org/js-string-escape/-/js-string-escape-1.0.1.tgz"
@@ -10441,6 +10446,11 @@
   "integrity" "sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M="
   "resolved" "https://registry.npmjs.org/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz"
   "version" "1.1.9"
+
+"svelte-grid@^5.1.1":
+  "integrity" "sha512-PJTC4PUejb8RzcUjymWnf1HALqseUBwxl+p+i5uJlDIC1+zXKok1J16IDoHQxXhNj+INcF9KHE7hIm++NurSAQ=="
+  "resolved" "https://registry.npmjs.org/svelte-grid/-/svelte-grid-5.1.1.tgz"
+  "version" "5.1.1"
 
 "svelte-hmr@^0.14.2":
   "integrity" "sha512-bKE9+4qb4sAnA+TKHiYurUl970rjA0XmlP9TEP7K/ncyWz3m81kA4HOgmlZK/7irGK7gzZlaPDI3cmf8fp/+tg=="

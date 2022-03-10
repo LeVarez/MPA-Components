@@ -2,23 +2,28 @@
 
     export let tag: string;
     export let alt: string;
+    export let onClickFn = () => {
+       console.log("clicked")
+    }
+
     let style:string;
-    if (alt === "grey"){
-        style = "tag-area alternative";
+
+    let calcStyle = () => {
+        if (alt === "grey"){
+            style = "tag-area alternative";
+        }
+        else if (alt === "fading")
+        {
+            style = "tag-area fading";
+        }
+        else {
+            style = "tag-area";
+        }
     }
-    else if (alt === "fading")
-    {
-        style = "tag-area fading";
-    }
-    else {
-        style = "tag-area";
-    }
-    const clickTag = () => {
-        alert("Clicked " + tag + "!");
-    }
+    $: if(alt) calcStyle();
 </script>
 
-<div class={style} on:click={clickTag} tabindex="0">{tag}</div>
+<div class={style} on:click={onClickFn} tabindex="0">{tag}</div>
 
 <style>
     .alternative {

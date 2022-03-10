@@ -147,5 +147,3 @@
         parameters={caseStudiesInfo[0]}
     />
 </div>
-
-

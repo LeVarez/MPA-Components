@@ -97,9 +97,7 @@
         border-radius: 20px;
         margin-bottom: 0.4rem;
         color: #FFFFFF;
-        background: rgba(249, 249, 249, 0.1) !important;
-        background-blend-mode: soft-light !important;
-        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
+        background-color:rgba(249, 249, 249, 0.25);
         border: none;
         padding: 0.25rem 0.7rem 0.25rem 0.7rem;
         cursor: pointer;

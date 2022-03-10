@@ -41,8 +41,6 @@
 {/if}
 
 
-
-
 <style>
   :root{
     --dot-size: 10px

@@ -21,10 +21,11 @@
 
     .container {
         margin: 0;
+        background-color: #cccccc;
         position: relative;
         width: 100%;
+        height: 750px;
         background-image: url("/img/case-study-preview-image.png");
-        height: 500px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

@@ -1,6 +1,7 @@
 <script lang='ts'>
     import MainPreviewCarousel from '../src/stories/MainPreviewCarousel.svelte';
     import CaseStudyIntroduction from './stories/CaseStudyIntroduction.svelte';
+    import CaseStudyCover from './stories/CaseStudyCover.svelte';
     import type { cardParameters, tagParameters } from "./stories/interfaces";
     import caseStudiesInfo from "./stories/case_studies.json";
     import PageTopSearch from "./stories/PageTopSearch.svelte";
@@ -145,8 +146,6 @@
     <CaseStudyIntroduction
         parameters={caseStudiesInfo[0]}
     />
-
-    <MadLibLanding></MadLibLanding>
 </div>
 
 

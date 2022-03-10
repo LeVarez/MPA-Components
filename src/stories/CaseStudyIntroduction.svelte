@@ -14,9 +14,10 @@
 
 </script>
 
-<header>
-    <CaseStudyCover></CaseStudyCover>
-</header>
+<div>
+    <CaseStudyCover/>
+</div>
+
 
 <div class="information-container">
     <div class="grid-container-first">

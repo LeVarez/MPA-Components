@@ -4,9 +4,14 @@
 
     $: console.log(milestonesWidth);
 
-    //    <svg class="svg" width={milestonesWidth-100} height="4" viewBox="0 0 {milestonesWidth-100} 4" fill="none">
-        //<path d="M100 2H{milestonesWidth-100}" stroke="#F1C0B5" stroke-width="3"/>
-    //</svg>
+/*
+    <div class="svg-line">
+        <svg class="line" height="4px" width={milestonesWidth-300}>
+            <line x1="100" y1="0" x2={milestonesWidth-300} y2="0"/>
+        </svg>
+    </div>
+
+*/
 
 </script>
 
@@ -14,11 +19,7 @@
     <div class="title-container">
         <div class="title">Milestones</div>
     </div>
-    <div class="svg-line">
-        <svg class="line" height="4px" width={milestonesWidth-300}>
-            <line x1="100" y1="0" x2={milestonesWidth-300} y2="0"/>
-        </svg>
-    </div>
+
 
 </div>
 

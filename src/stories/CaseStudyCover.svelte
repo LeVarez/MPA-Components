@@ -4,10 +4,16 @@
     //<div class="search-bar"><PageTopSearch/></div>
     //<div class="title2">{@html parameters.title}</div>
 
+
+    /*
+    <div class="container" bind:clientWidth={width} bind:clientHeight={height}>
+    <b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification
+</div>
+    */
+
     let width, height;
 
 </script>
-
 
 <div class="container" bind:clientWidth={width} bind:clientHeight={height}>
     <b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification
@@ -15,20 +21,19 @@
 
 <style>
 
+    .background-image {
+        height:750px;
+    }
+
     .title {
         position: relative;
     }
 
     .container {
+        width: 100%;
         margin: 0;
         background-color: #cccccc;
-        position: relative;
-        width: 100%;
         height: 750px;
-        background-image: url("/img/case-study-preview-image.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
     }
 
 </style>

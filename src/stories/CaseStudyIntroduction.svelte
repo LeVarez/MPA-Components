@@ -133,7 +133,7 @@
         justify-content: flex-start;
         align-items: center;
         background: #311E5D;
-        width: 100vw;
+        width: 100%;
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.2);
     }
 

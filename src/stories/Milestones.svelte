@@ -58,7 +58,7 @@
     .container {
         position: relative;
         margin-top: 25px;
-        width: 100vw;
+        width: 100%;
         height: 350px;
         background: rgba(249, 249, 249, 0.12);
         box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.15);

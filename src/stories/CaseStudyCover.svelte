@@ -4,24 +4,30 @@
     //<div class="search-bar"><PageTopSearch/></div>
     //<div class="title2">{@html parameters.title}</div>
 
+    let width, height;
+
 </script>
 
 
-<div class="container">
+<div class="container" bind:clientWidth={width} bind:clientHeight={height}>
     <b>Port Honduras Marine Reserve</b> – effective co-management and financial diversification
 </div>
 
-
-
-
-
 <style>
 
-    .container {
+    .title {
         position: relative;
-        height: 720px;
+    }
+
+    .container {
+        margin: 0;
+        position: relative;
+        width: 100%;
         background-image: url("/img/case-study-preview-image.png");
-        object-fit: contain;
+        height: 500px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
 </style>

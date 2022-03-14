@@ -17,7 +17,13 @@
 
 <div class="container" bind:clientWidth={milestonesWidth}>
     <div class="title-container">
-        <div class="title">Milestones</div>
+        <div class="title">
+            <div class="grid-item-first">
+                <div class="property-name">
+                    Milestones
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -37,16 +43,24 @@
     }
 
     .title {
-        margin-top: 25px;
+        display: grid;
+        grid-template-columns: 325px 225px 425px 325px; /* This has to sum a total of 1.300px*/
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
+
+    .grid-item-first {
+        text-align: left;
+        padding: 20px;
+    }
+
+    .property-name {
         font-family: 'Montserrat';
         font-weight: bold;
-        font-size: 20;
         color: #F1C0B5;
-        width: 1300px;
-        text-align: left;
-        display: grid;
-        padding-left: 120px;
-        padding-right: 80px;
+        font-size: 16px;
+        line-height: 24px;
     }
 
     .svg-line {

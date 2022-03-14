@@ -15,117 +15,58 @@
 </script>
 
 
-<div class="container">
 
-    <CaseStudyCover/>
-    <div class="information-container">
-        <div class="grid-container-first">
-            <div class="grid-item-first">
-                <div class="property-name">Name</div>
-                <div class="property-value-first">{@html parameters.name}</div>
-            </div>
-            <div class="grid-item-first">
-                <div class="property-name">Established in</div>
-                <div class="property-value-first">{@html parameters.established}</div>
-            </div>
-            <div class="grid-item-first">
-                <div class="property-name">Size</div>
-                <div class="property-value-first">{@html parameters.size}</div>
-            </div>
+<CaseStudyCover/>
+<div class="information-container">
+    <div class="grid-container-first">
+        <div class="grid-item-first">
+            <div class="property-name">Name</div>
+            <div class="property-value-first">{@html parameters.name}</div>
+        </div>
+        <div class="grid-item-first">
+            <div class="property-name">Established in</div>
+            <div class="property-value-first">{@html parameters.established}</div>
+        </div>
+        <div class="grid-item-first">
+            <div class="property-name">Size</div>
+            <div class="property-value-first">{@html parameters.size}</div>
+        </div>
+        <div class="globe">
+            <GlobeViz width={245} highlight={parameters.highlight} />
+        </div>
 
-        </div>
-    
-        <div class="grid-container-second">
-            <div class="grid-item-second">
-                <div class="property-name">Governance</div>
-                <div class="property-value-second">{@html parameters.governance}</div>
-            </div>
-            <div class="grid-item-second">
-                <div class="property-name">Staff</div>
-                <div class="property-value-second">{@html parameters.staff}</div>
-            </div>
-            <div class="grid-item-second">
-                <div class="property-name">Budget</div>
-                <div class="property-value-second">{@html parameters.budget}</div>
-            </div>
-            <div class="grid-item-second">
-                <div class="property-name">Budget level</div>
-                <div class="property-value-second">{@html parameters.b_level}</div>
-            </div>
-        </div>
-    
-        <Milestones></Milestones>
     </div>
+
+    <div class="grid-container-second">
+        <div class="grid-item-second">
+            <div class="property-name">Governance</div>
+            <div class="property-value-second">{@html parameters.governance}</div>
+        </div>
+        <div class="grid-item-second">
+            <div class="property-name">Staff</div>
+            <div class="property-value-second">{@html parameters.staff}</div>
+        </div>
+        <div class="grid-item-second">
+            <div class="property-name">Budget</div>
+            <div class="property-value-second">{@html parameters.budget}</div>
+        </div>
+        <div class="grid-item-second">
+            <div class="property-name">Budget level</div>
+            <div class="property-value-second">{@html parameters.b_level}</div>
+        </div>
+    </div>
+
+    <Milestones></Milestones>
 </div>
 
 
-
-
-
-
-
-
 <style>
-    
-    .container {
-        
-    }
-
-    .landing-container {
-        position: static;
-        height: 720px;
-    }
-
-    .search-bar {
-        position: absolute;
-        top: 100px;
-        right: 100px;
-        z-index: 500;
-    }
-
-    .title {
-        font-family: Montserrat;
-        font-style: normal;
-        font-size: 68px;
-        line-height: 83px;
-        color: #FFFFFF;
-        max-width: 625px;
-        bottom: 50px;
-        left: 50vw;
-        transform: translateX(-630px);
-        text-align: left;
-    }
-
-    .title2 {
-        padding-top: 200px;
-        font-family: Montserrat;
-        font-style: normal;
-        font-size: 68px;
-        line-height: 83px;
-        color: #FFFFFF;
-        max-width: 625px;
-        text-align: left;
-    }
-
-    .title-container {
-        height: 720px;
-        position: relative;
-        display: block;
-        top: 0;
-    }
 
     :global(sup) {
         font-size: 0.6em;
         vertical-align: top;
         position: relative; 
         top: -0.5em;
-    }
-
-    .background-image {
-        width: 100vw;
-        height: auto;
-        /*object-fit: cover;
-        vertical-align: middle;*/
     }
 
     .information-container {

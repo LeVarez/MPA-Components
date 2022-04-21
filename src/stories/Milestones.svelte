@@ -1,17 +1,9 @@
 <script lang="ts">
 
+    import Milestone from "./Milestone.svelte";
+
     let milestonesWidth: number;
 
-    $: console.log(milestonesWidth);
-
-/*
-    <div class="svg-line">
-        <svg class="line" height="4px" width={milestonesWidth-300}>
-            <line x1="100" y1="0" x2={milestonesWidth-300} y2="0"/>
-        </svg>
-    </div>
-
-*/
 
 </script>
 
@@ -26,10 +18,21 @@
         </div>
     </div>
 
+    <svg class="svg">
+        <line class="svg-line" x1="0" y1="50%" x2="100%" y2="50%"/>
+    </svg>
+
+    <div class="milestones-grid">
+        <Milestone/>
+    </div>
 
 </div>
 
 <style>
+
+    .milestones-grid {
+        padding-left: 100px;
+    }
 
     .title-container {
         position: static;
@@ -58,16 +61,20 @@
     .property-name {
         font-family: 'Montserrat';
         font-weight: bold;
-        color: #F1C0B5;
+        color: #FFFFFF;
         font-size: 16px;
         line-height: 24px;
     }
 
     .svg-line {
-        margin-top: 50px;
-        stroke: #F1C0B5;
-        stroke-width: 6px;
-        fill: none;
+        stroke:#FBE26B;
+        stroke-width:3;
+    }
+
+    .svg {
+        height:5px;
+        width:100%;
+        margin-top: 34px;
     }
 
     .container {
@@ -75,9 +82,16 @@
         margin-top: 25px;
         width: 100%;
         height: 350px;
-        background: rgba(249, 249, 249, 0.12);
+        background: #04558E;
         box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.15);
+        padding-bottom: 50px;
     }
 
+    .milestone-point {
+        width: 7px;
+        height: 7px;
+        background: #096EAE;
+        border: 3px solid #FBE26B;
+    }
     
 </style>

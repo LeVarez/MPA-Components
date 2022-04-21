@@ -78,7 +78,7 @@
         align-content: center;
         justify-content: flex-start;
         align-items: center;
-        background: #311E5D;
+        background: #13487C;
         width: 100%;
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.2);
     }

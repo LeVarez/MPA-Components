@@ -6,7 +6,7 @@
     import caseStudiesInfo from "./stories/case_studies.json";
     import PageTopSearch from "./stories/PageTopSearch.svelte";
     import MadLibLanding from './stories/MadLibLanding.svelte';
-
+/*
     let tagArray1: tagParameters[] = 
         [{tag: "Blue economy", alt: ""}, 
         {tag: "MPAs", alt: ""}, 
@@ -130,7 +130,7 @@
     let chapterParams = [param1_0, param1_1, param1_2, param1_3, param1_4, param1_5];
     let caseStudyParams = [param2_0, param2_1, param2_2, param2_3, param2_4, param2_5];
 
-    /*
+    
 
 
         <PageTopSearch/>

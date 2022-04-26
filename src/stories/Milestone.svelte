@@ -2,7 +2,10 @@
 
     let milestone_1 = 'Toledo Institute for Development and Environment (TIDE) registered';
     let milestone_2 = 'Toledo Institute for Development and Environment (TIDE) registered';
+    let milestone_3 = 'Toledo Institute for Development and Environment (TIDE) registered';
+    let milestone_4 = 'Toledo Institute for Development and Environment (TIDE) registered';
 
+    let milestonesArray = [milestone_1, milestone_2, milestone_3, milestone_4];
 
 </script>
 
@@ -22,7 +25,9 @@
                 <circle cx="7.5" cy="7.5" r="5" stroke="#FBE26B" stroke-width="3" fill="#096EAE" />
             </svg>
         </div>
-        <div class="text">{milestone_1}</div>
+        {#each milestonesArray as m, i}
+            <div class="text">{m}</div>
+        {/each}
     </div>
 
 </div>
